@@ -40,10 +40,13 @@ const defaultCountries = [
   "Canada",
 ];
 const defaultCourses = [
+  "AI Developement",
+  "Microsoft Azure",
+  "Artificial Intelligence",
   "Data Analytics",
-  "Software Development",
-  "Digital Marketing",
-  "Cloud Computing",
+  "Development Workflow",
+  "Cloud Native Data Storage",
+  "Azure Development"
 ];
 const defaultStatuses = ["Student", "Employed", "Unemployed", "Other"];
 const defaultEducationLevels = [
@@ -202,6 +205,8 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
   const [fileName, setFileName] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Mobile menu toggle
@@ -371,100 +376,263 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
   };
 
   //header
-  const Header = (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="/" className="flex items-center">
+  // const Header = (
+  //   <header className="bg-white shadow-md sticky top-0 z-50">
+  //     <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
+  //       <a href="/" className="flex items-center">
+  //         <img
+  //           src="/growtechafrica.png"
+  //           width={50}
+  //           height={80}
+  //           alt="GrowTechAfrica Logo"
+  //         />
+  //         <span className="text-2xl font-bold text-gray-800 ml-2">
+  //           GrowTechAfrica
+  //         </span>
+  //       </a>
+  //       <div className="hidden md:flex space-x-8">
+  //         <a
+  //           href="/#about"
+  //           className="text-gray-600 hover:text-grass-green transition duration-300"
+  //         >
+  //           About Us
+  //         </a>
+  //         <a
+  //           href="/#programs"
+  //           className="text-gray-600 hover:text-grass-green transition duration-300"
+  //         >
+  //           Programs
+  //         </a>
+  //         <a
+  //           href="/#Team"
+  //           className="text-gray-600 hover:text-grass-green transition duration-300"
+  //         >
+  //           Team
+  //         </a>
+  //         <a
+  //           href="/#partners"
+  //           className="text-gray-600 hover:text-grass-green transition duration-300"
+  //         >
+  //           Partners
+  //         </a>
+  //         <a
+  //           href="/#contact"
+  //           className="text-gray-600 hover:text-grass-green transition duration-300"
+  //         >
+  //           Contact
+  //         </a>
+  //       </div>
+  //       <div className="md:hidden">
+  //         <button
+  //           id="mobile-menu-button"
+  //           className="text-gray-600 focus:outline-none"
+  //         >
+  //           <svg
+  //             className="w-6 h-6"
+  //             fill="none"
+  //             stroke="currentColor"
+  //             viewBox="0 0 24 24"
+  //             xmlns="http://www.w3.org/2000/svg"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               strokeWidth={2}
+  //               d="M4 6h16M4 12h16m-7 6h7"
+  //             ></path>
+  //           </svg>
+  //         </button>
+  //       </div>
+  //     </nav>
+  //     {/* Mobile Menu */}
+  //     <div id="mobile-menu" className="hidden md:hidden">
+  //       <a href="/#about" className="block py-2 px-4 text-sm hover:bg-gray-100">
+  //         About Us
+  //       </a>
+  //       <a
+  //         href="/#programs"
+  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
+  //       >
+  //         Programs
+  //       </a>
+  //       <a
+  //         href="/#partners"
+  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
+  //       >
+  //         Partners
+  //       </a>
+  //       <a
+  //         href="/#contact"
+  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
+  //       >
+  //         Contact
+  //       </a>
+  //     </div>
+  //   </header>
+  // );
+
+  // --- Header ---
+const Header = (
+  <>
+    {/* Header */}
+    <header
+      id="site-header"
+      className="sticky top-0 z-50 bg-gradient-to-r from-white/95 via-green-50/90 to-white/95 backdrop-blur-md shadow transition-all duration-300"
+    >
+      <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <a href="/" className="flex items-center group">
           <img
             src="/growtechafrica.png"
-            width={50}
-            height={80}
+            width={56}
+            height={56}
             alt="GrowTechAfrica Logo"
+            className="rounded-xl shadow-md group-hover:rotate-3 group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src =
+                "https://placehold.co/80x80/000000/FFFFFF?text=GTA";
+            }}
           />
-          <span className="text-2xl font-bold text-gray-800 ml-2">
+          <span className="text-2xl font-extrabold text-gray-800 ml-3 tracking-tight group-hover:text-grass-green transition-colors duration-300">
             GrowTechAfrica
           </span>
         </a>
-        <div className="hidden md:flex space-x-8">
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex space-x-8 items-center font-medium">
+          {[
+            ["About", "/#about"],
+            ["Programs", "/#programs"],
+            ["Who Should Enroll", "/#who"],
+            ["Career Outcomes", "/#outcomes"],
+            ["Partners", "/#partners"],
+            ["Team", "/#team"],
+            ["Contact", "/#contact"],
+          ].map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              className="relative text-gray-700 hover:text-grass-green transition-colors duration-300 group"
+            >
+              {label}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-grass-green transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))}
+
           <a
-            href="/#about"
-            className="text-gray-600 hover:text-grass-green transition duration-300"
+            href="/form"
+            className="ml-4 bg-grass-green text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:shadow-grass-green/40 hover:scale-105 transition-all duration-300 relative overflow-hidden"
           >
-            About Us
-          </a>
-          <a
-            href="/#programs"
-            className="text-gray-600 hover:text-grass-green transition duration-300"
-          >
-            Programs
-          </a>
-          <a
-            href="/#Team"
-            className="text-gray-600 hover:text-grass-green transition duration-300"
-          >
-            Team
-          </a>
-          <a
-            href="/#partners"
-            className="text-gray-600 hover:text-grass-green transition duration-300"
-          >
-            Partners
-          </a>
-          <a
-            href="/#contact"
-            className="text-gray-600 hover:text-grass-green transition duration-300"
-          >
-            Contact
+            <span className="relative z-10">Enroll</span>
+            <span className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-600 opacity-0 hover:opacity-100 transition-opacity duration-500" />
           </a>
         </div>
-        <div className="md:hidden">
+
+        {/* Mobile Toggle */}
+        <div className="md:hidden flex items-center">
           <button
-            id="mobile-menu-button"
-            className="text-gray-600 focus:outline-none"
+            onClick={() => setMobileMenuOpen((s) => !s)}
+            aria-label="Toggle menu"
+            className="text-gray-700 hover:text-grass-green focus:outline-none transition"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
+            {mobileMenuOpen ? (
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </nav>
+
       {/* Mobile Menu */}
-      <div id="mobile-menu" className="hidden md:hidden">
-        <a href="/#about" className="block py-2 px-4 text-sm hover:bg-gray-100">
-          About Us
-        </a>
-        <a
-          href="/#programs"
-          className="block py-2 px-4 text-sm hover:bg-gray-100"
+      {mobileMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="md:hidden bg-white/95 backdrop-blur-md border-t shadow-xl animate-slideFade"
         >
-          Programs
-        </a>
-        <a
-          href="/#partners"
-          className="block py-2 px-4 text-sm hover:bg-gray-100"
-        >
-          Partners
-        </a>
-        <a
-          href="/#contact"
-          className="block py-2 px-4 text-sm hover:bg-gray-100"
-        >
-          Contact
-        </a>
-      </div>
+          <div className="px-6 py-4 space-y-2">
+            {[
+              ["About", "/#about"],
+              ["Programs", "/#programs"],
+              ["Who Should Enroll", "/#who"],
+              ["Career Outcomes", "/#outcomes"],
+              ["Partners", "/#partners"],
+              ["Team", "/#team"],
+              ["Contact", "/#contact"],
+            ].map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="block py-2 px-3 rounded hover:bg-gray-100 hover:text-grass-green transition"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+
+            <a
+              href="/form"
+              className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Enroll
+            </a>
+          </div>
+        </div>
+      )}
     </header>
-  );
+
+    {/* Animation Styles */}
+    <style jsx>{`
+      @keyframes slideFade {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-slideFade {
+        animation: slideFade 0.4s ease-out;
+      }
+
+      /* Shrink header on scroll */
+      #site-header.scrolled {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+    `}</style>
+  </>
+);
+
 
   // --- Interfaces ---
   if (isSubmitting) {
