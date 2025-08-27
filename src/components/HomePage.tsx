@@ -1,163 +1,194 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 type Program = {
   slug: string;
   title: string;
   image: string;
   summary: string;
+  courses: string[];
   ectsCredits: string;
   onlineSelfStudy: string;
+  portalAccessDuration: string;
+  studyMaterialAndResources: string;
   mentorship: string;
-  onlineAssessments: string;
+  courseCompletion: string;
+  professionalCertificateExam: string;
+  programProfessionalCertificate: string;
   expandable?: { bullets: string[] };
 };
 
 const programs: Program[] = [
   {
-    slug: "ai-developement",
-    title: "AI Developement",
+    slug: "cloud-and-cybersecurity",
+    title: "Cloud and Cybersecurity",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "This course explores Azure AI services, natural language processing, retrieval augmented generation, and generative AI, with a focus on deploying secure, responsible, and advanced AI solutions.",
-    ectsCredits: "2 credits",
-    onlineSelfStudy: "54 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
+      "The Cloud and Cybersecurity program equips learners with the knowledge and skills to design, secure, and manage modern cloud environments using Microsoft Azure and cybersecurity best practices. It covers foundational concepts, hands-on administration, security technologies, and advanced architectural strategies to protect data, applications, and infrastructure from evolving cyber threats.",
+    courses: [
+      "Elements of Cloud & Cybersecurity",
+      "Azure Fundamentals",
+      "Cybersecurity Fundamentals",
+      "Azure Administrator",
+      "Azure Security Technologies",
+      "Cybersecurity Architect",
+    ],
+    ectsCredits: "12 Credits",
+    onlineSelfStudy: "324 Hours",
+    portalAccessDuration: "12 Months",
+    studyMaterialAndResources: "Yes",
+    mentorship: "Solid Mentorship Support",
+    courseCompletion: "Assessment based",
+    professionalCertificateExam: "Online",
+    programProfessionalCertificate: "1",
     expandable: {
       bullets: [
-        "Introduces Azure AI Services, deployment of AI containers, and AI Language services.",
-        "Explains natural language processing (NLP), conversational understanding, and CLU capabilities.",
-        "Covers retrieval augmented generation (RAG) and AI search in Azure.",
-        "Demonstrates generative AI development, including OpenAI, fine-tuning, and responsible AI.",
-        "Summarizes advanced AI practices, from security to generating code with AI.",
+        "Covers cloud computing essentials and cybersecurity fundamentals for building a solid foundation.",
+        "Explains Azure services, identity management, storage, networking, and core Azure components.",
+        "Introduces security frameworks, threat analysis, and best practices for safeguarding systems.",
+        "Provides hands-on training in managing Azure resources, workloads, and enterprise environments.",
+        "Focuses on implementing Azure security controls, compliance, and threat protection strategies.",
+        "Explores advanced cybersecurity architecture for designing secure, scalable, and resilient systems.",
       ],
     },
   },
   {
-    slug: "microsoft-azure",
-    title: "Microsoft Azure",
+    slug: "ai-developer",
+    title: "AI Developer",
     image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1667372391477-bf2b4e6c6418?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "This course introduces the fundamentals of Azure, covering infrastructure, computing services, networking, storage, and essential security measures for managing cloud resources.",
-    ectsCredits: "2 credits",
-    onlineSelfStudy: "54 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
+      "The AI Developer program equips learners with the technical expertise to design, build, and deploy intelligent solutions using Microsoft Azure and modern AI frameworks. It covers core AI principles, data analytics, development workflows, cloud-native data storage, and advanced AI development practices to prepare learners for real-world AI-driven projects and solutions.",
+    courses: [
+      "Microsoft Azure",
+      "Artificial Intelligence",
+      "Data and Analytics",
+      "Development Workflow",
+      "Cloud Native Data Storage",
+      "Azure Development",
+      "AI Development",
+    ],
+    ectsCredits: "10 Credits",
+    onlineSelfStudy: "270 Hours",
+    portalAccessDuration: "12 Months",
+    studyMaterialAndResources: "Yes",
+    mentorship: "Solid Mentorship Support",
+    courseCompletion: "Assessment based",
+    professionalCertificateExam: "Online",
+    programProfessionalCertificate: "1",
     expandable: {
       bullets: [
-        "Covers the fundamentals of Azure, its physical and management infrastructure.",
-        "Explores computing services including virtual machines and app hosting.",
-        "Introduces Azure networking concepts such as virtual networks and connectivity.",
-        "Discusses data, storage, and migration services in Azure.",
-        "Examines security, authentication, authorization, and conditional access.",
+        "Covers Microsoft Azure fundamentals, services, and integrations for AI-driven development.",
+        "Introduces artificial intelligence concepts, frameworks, and machine learning models.",
+        "Explains data analytics techniques for preparing, processing, and visualizing datasets.",
+        "Teaches efficient development workflows and modern DevOps practices for AI solutions.",
+        "Covers cloud-native data storage solutions for scalability, performance, and security.",
+        "Provides hands-on training in Azure development and advanced AI solution deployment.",
+      ],
+    },
+  },
+
+  {
+    slug: "power-platform",
+    title: "Power Platform (PP)",
+    image:
+      "https://images.unsplash.com/photo-1633265486064-086b219458ec?auto=format&fit=crop&w=1200&q=80",
+    summary:
+      "The Power Platform (PP) program equips learners with the knowledge and practical skills needed to design, build, and deploy business solutions using Microsoft Power Platform tools. It covers core fundamentals, app development, solution architecture, and functional consulting to help learners create efficient, low-code applications and automate business processes seamlessly.",
+    courses: [
+      "Microsoft PP Fundamentals",
+      "Microsoft PP App Maker",
+      "Microsoft PP Functional Consultant",
+      "Microsoft PP Solution Architect",
+    ],
+    ectsCredits: "10 Credits",
+    onlineSelfStudy: "270 Hours",
+    portalAccessDuration: "12 Months",
+    studyMaterialAndResources: "Yes",
+    mentorship: "Solid Mentorship Support",
+    courseCompletion: "Assessment based",
+    professionalCertificateExam: "Online",
+    programProfessionalCertificate: "1",
+    expandable: {
+      bullets: [
+        "Introduces Microsoft Power Platform fundamentals, tools, and core capabilities.",
+        "Teaches app development using Power Apps for creating low-code business solutions.",
+        "Covers automation and process optimization using Power Automate and related tools.",
+        "Explains data analysis, reporting, and visualization using Power BI within the platform.",
+        "Provides hands-on training for functional consulting and business solution deployment.",
+        "Explores solution architecture and strategies for scaling enterprise-grade applications.",
+      ],
+    },
+  },
+
+  {
+    slug: "data-engineer",
+    title: "Data Engineer",
+    image:
+      "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
+    summary:
+      "The Data Engineer program equips learners with the technical expertise to design, build, and manage scalable data solutions using Microsoft Azure and modern data engineering tools. It covers core Azure services, data analytics, AI integration, and advanced engineering techniques to prepare learners for real-world data-driven projects and enterprise solutions.",
+    courses: [
+      "Exploring Microsoft Azure",
+      "Exploring Artificial Intelligence",
+      "Exploring Data and Analytics",
+      "Data Analytics with Power BI",
+      "Data Engineering with Azure",
+      "Data Engineering with Fabric",
+    ],
+    ectsCredits: "12 Credits",
+    onlineSelfStudy: "324 Hours",
+    portalAccessDuration: "12 Months",
+    studyMaterialAndResources: "Yes",
+    mentorship: "Solid Mentorship Support",
+    courseCompletion: "Assessment based",
+    professionalCertificateExam: "Online",
+    programProfessionalCertificate: "1",
+    expandable: {
+      bullets: [
+        "Introduces core Microsoft Azure services and infrastructure for data engineering solutions.",
+        "Explores artificial intelligence integration within modern data-driven architectures.",
+        "Covers data analytics principles, data processing techniques, and business insights generation.",
+        "Provides hands-on training in building interactive dashboards and reports with Power BI.",
+        "Teaches advanced data engineering practices using Azure pipelines, storage, and compute services.",
+        "Explores Microsoft Fabric for managing, transforming, and scaling enterprise data solutions.",
       ],
     },
   },
   {
-    slug: "artificial-intelligence",
-    title: "Artificial Intelligence",
+    slug: "data-analyst",
+    title: "Data Analyst",
     image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=1200&q=80",
     summary:
-      "This course explores the foundations of AI, including machine learning, computer vision, natural language processing, generative AI, and the integration of these capabilities within Azure.",
-    ectsCredits: "2 credits",
-    onlineSelfStudy: "54 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
+      "The Data Analyst program equips learners with the skills to collect, process, analyze, and visualize data using Microsoft Azure, Power BI, and modern analytics tools. It focuses on transforming raw data into actionable insights, building dynamic reports, and leveraging AI and Fabric for advanced data analytics and business intelligence solutions.",
+    courses: [
+      "Exploring Microsoft Azure",
+      "Exploring Artificial Intelligence",
+      "Exploring Data and Analytics",
+      "Data Analytics with Power BI",
+      "Data Analytics with Azure",
+      "Data Analytics with Fabric",
+    ],
+    ectsCredits: "12 Credits",
+    onlineSelfStudy: "324 Hours",
+    portalAccessDuration: "12 Months",
+    studyMaterialAndResources: "Yes",
+    mentorship: "Solid Mentorship Support",
+    courseCompletion: "Assessment based",
+    professionalCertificateExam: "Online",
+    programProfessionalCertificate: "1",
     expandable: {
       bullets: [
-        "Introduces AI fundamentals, machine learning basics, supervised and unsupervised learning.",
-        "Explains how Azure integrates with AI to support intelligent applications.",
-        "Covers computer vision, facial recognition, and character recognition.",
-        "Examines natural language processing (NLP), conversational AI, and AI-powered speech.",
-        "Introduces generative AI concepts, Azure OpenAI services, copilots, and responsible AI use.",
-      ],
-    },
-  },
-  {
-    slug: "data-analytics",
-    title: "Data Analytics",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-    summary:
-      "This course covers core data concepts, relational and non-relational databases, large-scale and real-time analytics, and how Azure supports modern data management and visualization.",
-    ectsCredits: "1 credit",
-    onlineSelfStudy: "27 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
-    expandable: {
-      bullets: [
-        "Introduces data foundations, roles, services, and database concepts.",
-        "Compares relational and non-relational databases with a focus on Azure SQL and Cosmos DB.",
-        "Explains data analytics approaches—large-scale, real-time, and visualization techniques.",
-        "Demonstrates how Azure supports analytics and cloud data adoption.",
-        "Summarizes key data services and processing capabilities in Azure.",
-      ],
-    },
-  },
-  {
-    slug: "github-workflow",
-    title: "Development Workflow",
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80",
-    summary:
-      "This course focuses on leveraging GitHub and GitHub Copilot to enhance collaboration, automate workflows, improve productivity, and streamline programming with AI assistance.",
-    ectsCredits: "1 credit",
-    onlineSelfStudy: "27 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
-    expandable: {
-      bullets: [
-        "Provides an introduction to GitHub for collaboration, administration, and permissions.",
-        "Explains how to increase productivity using GitHub Copilot.",
-        "Covers prompt engineering for Copilot effectiveness.",
-        "Demonstrates GitHub Copilot in programming, including JavaScript, Python, and automation with GitHub Actions.",
-        "Summarizes workflow acceleration through AI-powered coding tools.",
-      ],
-    },
-  },
-  {
-    slug: "cosmos-db",
-    title: "Cloud Native Data Storage",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-    summary:
-      "This course introduces global databases through Azure Cosmos DB, teaching NoSQL solution design, migration, SDK integration, and advanced features for worldwide data applications.",
-    ectsCredits: "1 credit",
-    onlineSelfStudy: "27 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
-    expandable: {
-      bullets: [
-        "Introduces global database services and the role of Cosmos DB in powering applications.",
-        "Explores Cosmos DB components and NoSQL data models.",
-        "Teaches how to develop with Azure Cosmos DB by planning and implementing NoSQL solutions.",
-        "Covers data migration strategies into Cosmos DB.",
-        "Explains worldwide data solutions, SDK configuration, and advanced capabilities.",
-      ],
-    },
-  },
-  {
-    slug: "azure-development",
-    title: "Azure Development",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
-    summary:
-      "This course provides the foundations of Azure development, covering app services, containerized solutions, API management, security, and best practices for building scalable applications.",
-    ectsCredits: "1 credit",
-    onlineSelfStudy: "27 hours",
-    mentorship: "4 hours of mentor support",
-    onlineAssessments: "Yes",
-    expandable: {
-      bullets: [
-        "Introduces the foundations of Azure development, including App Services and Functions.",
-        "Explains how to develop solutions with unstructured data, containers, and container apps.",
-        "Covers advanced concepts, including API management, security, and app configurations.",
-        "Provides best practices for scalable, secure Azure development.",
+        "Introduces Microsoft Azure services and tools essential for modern data analytics.",
+        "Explores the role of artificial intelligence in enhancing data-driven decision-making.",
+        "Covers data analytics concepts, data processing techniques, and business intelligence strategies.",
+        "Provides hands-on experience with Power BI to build interactive dashboards and reports.",
+        "Teaches Azure-based analytics solutions for scalable, enterprise-grade data processing.",
+        "Explores Microsoft Fabric for advanced data modeling, integration, and analytics workflows.",
       ],
     },
   },
@@ -560,7 +591,25 @@ const HomePage: React.FC = () => {
             Microsoft Skills for Jobs Microdegree Programs
           </h2>
           <p className="text-gray-600 max-w-3xl lg:max-w-full lg:w-screen px-4 text-justify">
-            The Microsoft Skills for Jobs Microdegree Program is designed to help you build real-world tech skills that employers want and a pathway for higher studies in EU countries. Microdegree Programs focuses on in-demand technology areas like cybersecurity, cloud computing, Low code tool set, AI, data analytics, and more. The program is built around practical, job-relevant skills and uses a flexible, self-paced learning model that fits your schedule. Whether you are a student, recent graduate, freelancer, technology professional, career changer, or an individual seeking skills for employment without pursuing a full degree or diploma, this program is tailored for you. You will learn through high-quality courses jointly developed by Microsoft, KAMK University of Applied Sciences (Finland), and global tech companies. The courses follow the European Credit Transfer and Accumulation System (ECTS), meaning your credits and certificates are internationally recognized for quality international and local jobs and higher studies in EU countries. The Microsoft Skills for Job Microdegree Program is an online program designed for self-paced learning, with in-class mentorship (region-specific) to support your journey.
+            The Microsoft Skills for Jobs Microdegree Program is designed to
+            help you build real-world tech skills that employers want and a
+            pathway for higher studies in EU countries. Microdegree Programs
+            focuses on in-demand technology areas like cybersecurity, cloud
+            computing, Low code tool set, AI, data analytics, and more. The
+            program is built around practical, job-relevant skills and uses a
+            flexible, self-paced learning model that fits your schedule. Whether
+            you are a student, recent graduate, freelancer, technology
+            professional, career changer, or an individual seeking skills for
+            employment without pursuing a full degree or diploma, this program
+            is tailored for you. You will learn through high-quality courses
+            jointly developed by Microsoft, KAMK University of Applied Sciences
+            (Finland), and global tech companies. The courses follow the
+            European Credit Transfer and Accumulation System (ECTS), meaning
+            your credits and certificates are internationally recognized for
+            quality international and local jobs and higher studies in EU
+            countries. The Microsoft Skills for Job Microdegree Program is an
+            online program designed for self-paced learning, with in-class
+            mentorship (region-specific) to support your journey.
           </p>
         </div>
 
@@ -583,51 +632,76 @@ const HomePage: React.FC = () => {
                 <h2 className="text-2xl font-bold">{program.title}</h2>
                 <p className="text-gray-700">{program.summary}</p>
 
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p>
-                    <strong>Credits:</strong> {program.ectsCredits}
-                  </p>
-                  <p>
-                    <strong>Self-study:</strong> {program.onlineSelfStudy}
-                  </p>
-                  <p>
-                    <strong>Mentorship:</strong> {program.mentorship}
-                  </p>
-                  <p>
-                    <strong>Online Assessments:</strong>{" "}
-                    {program.onlineAssessments}
-                  </p>
+                {/* Container for courses and program details */}
+                <div className="flex flex-col md:flex-row justify-between items-start gap-6 mt-4">
+                  {/* Left side: Courses */}
+                  <div className="w-full md:w-1/2">
+                    <strong>Courses:</strong>
+                    <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                      {program.courses.map((course, index) => (
+                        <li key={index}>{course}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Right side: Program details */}
+                  <div className="w-full md:w-1/2 space-y-2 text-gray-700">
+                    <p>
+                      <strong>Credits:</strong> {program.ectsCredits}
+                    </p>
+                    <p>
+                      <strong>Self-study:</strong> {program.onlineSelfStudy}
+                    </p>
+                    <p>
+                      <strong>Portal Access Duration:</strong>{" "}
+                      {program.portalAccessDuration}
+                    </p>
+                    <p>
+                      <strong>Study Material and Resources:</strong>{" "}
+                      {program.studyMaterialAndResources}
+                    </p>
+                    <p>
+                      <strong>Mentorship:</strong> {program.mentorship}
+                    </p>
+                    <p>
+                      <strong>Course Completion:</strong>{" "}
+                      {program.courseCompletion}
+                    </p>
+                    <p>
+                      <strong>Professional Certificate Exam:</strong>{" "}
+                      {program.professionalCertificateExam}
+                    </p>
+                    <p>
+                      <strong>Program Professional Certificate:</strong>{" "}
+                      {program.programProfessionalCertificate}
+                    </p>
+                  </div>
                 </div>
 
-                {program.expandable && (
-                  <div className="mt-2">
-                    <div className="flex justify-between items-center gap-2">
-                      <button
-                        onClick={() => toggleExpand(program.slug)}
-                        className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-sm rounded-md border border-gray-300 transition"
-                      >
-                        {expandedSlug === program.slug
-                          ? "Show less"
-                          : "Learn more"}
-                      </button>
+                {/* Buttons */}
+                <div className="mt-4 flex justify-between items-center gap-2">
+                  <button
+                    onClick={() => toggleExpand(program.slug)}
+                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-sm rounded-md border border-gray-300 transition"
+                  >
+                    {expandedSlug === program.slug ? "Show less" : "Learn more"}
+                  </button>
 
-                      <Link
-                        to="/form"
-                        className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition"
-                      >
-                        Enroll
-                      </Link>
-                    </div>
+                  <Link
+                    to="/form"
+                    className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition"
+                  >
+                    Enroll
+                  </Link>
+                </div>
 
-                    {/* Expanded Content */}
-                    {expandedSlug === program.slug && (
-                      <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-700">
-                        {program.expandable.bullets.map((bullet, idx) => (
-                          <li key={idx}>{bullet}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                {/* Expanded Content */}
+                {expandedSlug === program.slug && (
+                  <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-700">
+                    {program.expandable.bullets.map((bullet, idx) => (
+                      <li key={idx}>{bullet}</li>
+                    ))}
+                  </ul>
                 )}
               </div>
             </div>
@@ -1048,17 +1122,40 @@ const HomePage: React.FC = () => {
           <div className="flex-1 max-w-sm mx-auto md:mx-0 text-center">
             <h4 className="text-lg font-semibold text-white mb-3">Follow Us</h4>
             <div className="flex justify-center md:justify-center gap-6">
-              <a href="#" className="hover:text-grass-green transition">
-                <Facebook className="w-6 h-6" />
+              {/* Facebook */}
+              <a
+                target="_blank"
+                href="https://www.facebook.com/profile.php?id=61579253218062"
+                className="transition transform hover:scale-125 hover:rotate-6 hover:text-blue-500 duration-300"
+              >
+                <FaFacebook className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-grass-green transition">
-                <Twitter className="w-6 h-6" />
+
+              {/* X (Twitter) */}
+              <a
+                target="_blank"
+                href="#"
+                className="transition transform hover:scale-125 hover:-rotate-6 hover:text-black duration-300"
+              >
+                <FaXTwitter className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-grass-green transition">
-                <Linkedin className="w-6 h-6" />
+
+              {/* LinkedIn */}
+              <a
+                target="_blank"
+                href="#"
+                className="transition transform hover:scale-125 hover:rotate-6 hover:text-blue-700 duration-300"
+              >
+                <FaLinkedin className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-grass-green transition">
-                <Instagram className="w-6 h-6" />
+
+              {/* Instagram */}
+              <a
+                target="_blank"
+                href="https://www.instagram.com/grow.techafrica/"
+                className="transition transform hover:scale-125 hover:-rotate-6 hover:text-pink-500 duration-300"
+              >
+                <FaInstagram className="w-6 h-6" />
               </a>
             </div>
           </div>
