@@ -436,7 +436,7 @@ const HomePage: React.FC = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex justify-center gap-6 items-center">
+          <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6 items-center">
             <a
               href="#programs"
               className="relative bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-green-500/40 transform hover:scale-105 transition-all duration-300"
