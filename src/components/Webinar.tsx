@@ -21,14 +21,18 @@ const Webinar: React.FC = () => {
     e.preventDefault();
     setError(null);
     try {
-      const response = await fetch(WEBINAL_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: WEBINAL_TOKEN,
-        },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "https://api.reload.ng/Bot/app/Gtechafrica/webinar/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKV1QiLCJqdGkiOiIxIiwiaXNzIjoiQmxhY2tTaWxpY29uIiwiaWF0IjoxNzUwMTcwNDQ1LCJleHAiOjIzNzIyNTA0NDV9.uiGW-qDngP5ui6Z1l3KLtCqTIhoUPbCBL_RY8qp3VPSeRDuUDG1HLhyNxKrHCh9FjXOwKjbiMdRCqekCm8FmFg",
+          },
+          body: JSON.stringify(form),
+        }
+      );
       if (response.ok) {
         setIsSubmitted(true);
       } else {
