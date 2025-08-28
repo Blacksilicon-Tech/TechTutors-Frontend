@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -188,13 +188,121 @@ const programs: Program[] = [
 
 const HomePage: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // State: only one program slug can be expanded
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
-
   const toggleExpand = (slug: string) => {
     setExpandedSlug((prev) => (prev === slug ? null : slug));
   };
+  // State & refs for each mobile tooltip
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+
+  const [mobileHeaderTooltipVisible, setMobileHeaderTooltipVisible] =
+    useState(false);
+  const mobileHeaderRef = useRef<HTMLDivElement>(null);
+  const [mobileHeroTooltipVisible, setMobileHeroTooltipVisible] =
+    useState(false);
+  const heroEnrollRef = useRef<HTMLDivElement>(null);
+
+  const [mobileProgramsTooltipVisible, setMobileProgramsTooltipVisible] =
+    useState<Record<string, boolean>>({});
+  const programsEnrollRef = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const [mobileContactTooltipVisible, setMobileContactTooltipVisible] =
+    useState(false);
+  const contactEnrollRef = useRef<HTMLDivElement>(null);
+
+  const [mobileFooterTooltipVisible, setMobileFooterTooltipVisible] =
+    useState(false);
+  const footerEnrollRef = useRef<HTMLDivElement>(null);
+
+  // Click outside handlers for each tooltip
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        mobileHeaderRef.current &&
+        !mobileHeaderRef.current.contains(e.target as Node)
+      ) {
+        setMobileHeaderTooltipVisible(false);
+      }
+      if (
+        heroEnrollRef.current &&
+        !heroEnrollRef.current.contains(e.target as Node)
+      ) {
+        setMobileHeroTooltipVisible(false);
+      }
+      if (
+        contactEnrollRef.current &&
+        !contactEnrollRef.current.contains(e.target as Node)
+      ) {
+        setMobileContactTooltipVisible(false);
+      }
+      if (
+        footerEnrollRef.current &&
+        !footerEnrollRef.current.contains(e.target as Node)
+      ) {
+        setMobileFooterTooltipVisible(false);
+      }
+      Object.keys(programsEnrollRef.current).forEach((slug) => {
+        const ref = programsEnrollRef.current[slug];
+        if (ref && !ref.contains(e.target as Node)) {
+          setMobileProgramsTooltipVisible((prev) => ({
+            ...prev,
+            [slug]: false,
+          }));
+        }
+      });
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  // Mobile tooltip click handlers
+  const handleHeroClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!mobileHeroTooltipVisible) {
+      e.preventDefault();
+      setMobileHeroTooltipVisible(true);
+    }
+  };
+
+  const handleProgramClick = (
+    slug: string,
+    e: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (!mobileProgramsTooltipVisible[slug]) {
+      e.preventDefault();
+      setMobileProgramsTooltipVisible((prev) => ({ ...prev, [slug]: true }));
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!mobileContactTooltipVisible) {
+      e.preventDefault();
+      setMobileContactTooltipVisible(true);
+    }
+  };
+
+  const handleFooterClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!mobileFooterTooltipVisible) {
+      e.preventDefault();
+      setMobileFooterTooltipVisible(true);
+    }
+  };
+
+  const handleMobileHeaderClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!mobileHeaderTooltipVisible) {
+      e.preventDefault(); // prevent navigation until tooltip is dismissed
+      setMobileHeaderTooltipVisible(true);
+    }
+  };
+
+  const navLinks: [string, string][] = [
+    ["About", "/#about"],
+    ["Programs", "/#programs"],
+    ["Who Should Apply", "/#who"],
+    ["Career Outcomes", "/#outcomes"],
+    ["Partners", "/#partners"],
+    ["Team", "/#team"],
+    ["Contact", "/#contact"],
+  ];
 
   useEffect(() => {
     // Smooth anchor scrolling (keeps previous behavior)
@@ -242,15 +350,7 @@ const HomePage: React.FC = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-8 items-center font-medium">
-            {[
-              ["About", "#about"],
-              ["Programs", "#programs"],
-              ["Who Should Enroll", "#who"],
-              ["Career Outcomes", "#outcomes"],
-              ["Partners", "#partners"],
-              ["Team", "#team"],
-              ["Contact", "#contact"],
-            ].map(([label, href]) => (
+            {navLinks.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
@@ -279,9 +379,11 @@ const HomePage: React.FC = () => {
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm">
-                    Enrollment for the program has not begun yet. Upcoming
-                    webinar on <strong>6th September</strong>. Click Enroll to
-                    register for the webinar.
+                    Enrollment for the programs have not started yet. But there
+                    is an upcoming
+                    <strong>webinar</strong>webinar on{" "}
+                    <strong>6th September</strong>. Click Enroll to register for
+                    the webinar.
                   </p>
                 </div>
               )}
@@ -335,15 +437,7 @@ const HomePage: React.FC = () => {
             className="md:hidden bg-white/95 backdrop-blur-md border-t shadow-xl animate-slideFade"
           >
             <div className="px-6 py-4 space-y-2">
-              {[
-                ["About", "#about"],
-                ["Programs", "#programs"],
-                ["Who Should Enroll", "#who"],
-                ["Career Outcomes", "#outcomes"],
-                ["Partners", "#partners"],
-                ["Team", "#team"],
-                ["Contact", "#contact"],
-              ].map(([label, href]) => (
+              {navLinks.map(([label, href]) => (
                 <a
                   key={href}
                   href={href}
@@ -355,27 +449,26 @@ const HomePage: React.FC = () => {
               ))}
 
               {/* Mobile Enroll Button */}
-              <div
-                className="relative"
-                onMouseEnter={() => setHoveredButton("mobileEnroll")}
-                onMouseLeave={() => setHoveredButton(null)}
-              >
+              <div className="relative" ref={mobileHeaderRef}>
                 <Link
                   to="/webinar"
                   className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={handleMobileHeaderClick}
                 >
                   Enroll
                 </Link>
-                {hoveredButton === "mobileEnroll" && (
+
+                {mobileHeaderTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
                     <h3 className="font-bold text-lg mb-1">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm">
-                      Enrollment for the program has not begun yet. Upcoming
-                      webinar on <strong>6th September</strong>. Click Enroll to
-                      register for the webinar.
+                      Enrollment for the programs have not started yet. But
+                      there is an upcoming
+                      <strong>webinar</strong>webinar on{" "}
+                      <strong>6th September</strong>. Click Enroll to register
+                      for the webinar.
                     </p>
                   </div>
                 )}
@@ -443,26 +536,45 @@ const HomePage: React.FC = () => {
             >
               Explore Programs
             </a>
-            <div
-              className="relative"
-              onMouseEnter={() => setHoveredButton("heroEnroll")}
-              onMouseLeave={() => setHoveredButton(null)}
-            >
+
+            {/* Enroll Now Button */}
+            <div className="relative" ref={heroEnrollRef}>
               <Link
                 to="/webinar"
                 className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
+                onClick={handleHeroClick}
               >
                 Enroll Now
               </Link>
+
+              {/* Desktop tooltip */}
               {hoveredButton === "heroEnroll" && (
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
                   <h3 className="font-bold text-lg mb-1">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm">
-                    Enrollment for the program has not begun yet. Upcoming
-                    webinar on <strong>6th September</strong>. Click Enroll to
-                    register for the webinar.
+                    Enrollment for the programs have not started yet. But there
+                    is an upcoming
+                    <strong>webinar</strong>webinar on{" "}
+                    <strong>6th September</strong>. Click Enroll to register for
+                    the webinar.
+                  </p>
+                </div>
+              )}
+
+              {/* Mobile tooltip */}
+              {mobileHeroTooltipVisible && (
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
+                  <h3 className="font-bold text-lg mb-1">
+                    Enrollment not started yet!
+                  </h3>
+                  <p className="text-sm">
+                    Enrollment for the programs have not started yet. But there
+                    is an upcoming
+                    <strong>webinar</strong>webinar on{" "}
+                    <strong>6th September</strong>. Click Enroll to register for
+                    the webinar.
                   </p>
                 </div>
               )}
@@ -681,26 +793,49 @@ const HomePage: React.FC = () => {
                     {expandedSlug === program.slug ? "Show less" : "Learn more"}
                   </button>
 
+                  {/* Enroll Button */}
                   <div
                     className="relative"
+                    ref={(el) => (programsEnrollRef.current[program.slug] = el)}
                     onMouseEnter={() => setHoveredButton(program.slug)}
                     onMouseLeave={() => setHoveredButton(null)}
                   >
                     <Link
                       to="/webinar"
                       className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition relative z-10"
+                      onClick={(e) => handleProgramClick(program.slug, e)}
                     >
                       Enroll
                     </Link>
+
+                    {/* Desktop tooltip */}
                     {hoveredButton === program.slug && (
-                      <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                        <h3 className="font-bold text-lg mb-2">
+                      <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
+                        <h3 className="font-bold text-lg mb-1">
                           Enrollment not started yet!
                         </h3>
                         <p className="text-sm">
-                          Enrollment for the program has not begun yet. Upcoming
-                          webinar on <strong>6th September</strong>. Click
-                          Enroll to register for the webinar.
+                          Enrollment for the programs have not started yet. But
+                          there is an upcoming
+                          <strong>webinar</strong>webinar on{" "}
+                          <strong>6th September</strong>. Click Enroll to
+                          register for the webinar.
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Mobile tooltip */}
+                    {mobileProgramsTooltipVisible[program.slug] && (
+                      <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
+                        <h3 className="font-bold text-lg mb-1">
+                          Enrollment not started yet!
+                        </h3>
+                        <p className="text-sm">
+                          Enrollment for the programs have not started yet. But
+                          there is an upcoming
+                          <strong>webinar</strong>webinar on{" "}
+                          <strong>6th September</strong>. Click Enroll to
+                          register for the webinar.
                         </p>
                       </div>
                     )}
@@ -1074,26 +1209,50 @@ const HomePage: React.FC = () => {
               <p className="text-gray-300 mb-6">
                 Start your journey today and unlock global tech opportunities.
               </p>
+
+              {/* Enroll Button */}
               <div
                 className="relative"
+                ref={contactEnrollRef}
                 onMouseEnter={() => setHoveredButton("contactEnroll")}
                 onMouseLeave={() => setHoveredButton(null)}
               >
                 <Link
                   to="/webinar"
-                  className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition"
+                  className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition relative z-10"
+                  onClick={handleContactClick}
                 >
                   Enroll Now
                 </Link>
+
+                {/* Desktop tooltip */}
                 {hoveredButton === "contactEnroll" && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
                     <h3 className="font-bold text-lg mb-1">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm">
-                      Enrollment for the program has not begun yet. Upcoming
-                      webinar on <strong>6th September</strong>. Click Enroll to
-                      register for the webinar.
+                      Enrollment for the programs have not started yet. But
+                      there is an upcoming
+                      <strong>webinar</strong>webinar on{" "}
+                      <strong>6th September</strong>. Click Enroll to register
+                      for the webinar.
+                    </p>
+                  </div>
+                )}
+
+                {/* Mobile tooltip */}
+                {mobileContactTooltipVisible && (
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
+                    <h3 className="font-bold text-lg mb-1">
+                      Enrollment not started yet!
+                    </h3>
+                    <p className="text-sm">
+                      Enrollment for the programs have not started yet. But
+                      there is an upcoming
+                      <strong>webinar</strong>webinar on{" "}
+                      <strong>6th September</strong>. Click Enroll to register
+                      for the webinar.
                     </p>
                   </div>
                 )}
@@ -1142,24 +1301,46 @@ const HomePage: React.FC = () => {
               <li>
                 <div
                   className="relative"
+                  ref={footerEnrollRef}
                   onMouseEnter={() => setHoveredButton("footerEnroll")}
                   onMouseLeave={() => setHoveredButton(null)}
                 >
                   <Link
                     to="/webinar"
                     className="hover:text-grass-green transition"
+                    onClick={handleFooterClick}
                   >
                     Apply Now
                   </Link>
+
+                  {/* Desktop tooltip */}
                   {hoveredButton === "footerEnroll" && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
                       <h3 className="font-bold text-lg mb-1">
                         Enrollment not started yet!
                       </h3>
                       <p className="text-sm">
-                        Enrollment for the program has not begun yet. Upcoming
-                        webinar on <strong>6th September</strong>. Click Apply
-                        Now to register for the webinar.
+                        Enrollment for the programs have not started yet. But
+                        there is an upcoming
+                        <strong>webinar</strong>webinar on{" "}
+                        <strong>6th September</strong>. Click Apply Now to
+                        register for the webinar.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Mobile tooltip above the button */}
+                  {mobileFooterTooltipVisible && (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
+                      <h3 className="font-bold text-lg mb-1">
+                        Enrollment not started yet!
+                      </h3>
+                      <p className="text-sm">
+                        Enrollment for the programs have not started yet. But
+                        there is an upcoming
+                        <strong>webinar</strong>webinar on{" "}
+                        <strong>6th September</strong>. Click Apply Now to
+                        register for the webinar.
                       </p>
                     </div>
                   )}
