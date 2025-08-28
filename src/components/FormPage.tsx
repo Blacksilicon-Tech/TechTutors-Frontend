@@ -206,6 +206,8 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [errors, setErrors] = useState<any>({});
+
   useEffect(() => {
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -267,7 +269,6 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setIsSubmitting(true);
     await new Promise((r) => setTimeout(r, 50));
 
@@ -278,19 +279,19 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       data.append("firstName", formData.firstName);
       data.append("lastName", formData.lastName);
 
-      // Convert day/month/year → yyyy-MM-dd
+      // ✅ Convert day/month/year → yyyy-MM-dd
       if (formData.birthYear && formData.birthMonth && formData.birthDay) {
         const month = String(
           new Date(`${formData.birthMonth} 1`).getMonth() + 1
         ).padStart(2, "0");
         const day = formData.birthDay.padStart(2, "0");
         const birthDate = `${formData.birthYear}-${month}-${day}`;
-        data.append("birthDate", birthDate); // ✅ "2011-11-14"
+        data.append("birthDate", birthDate);
       }
 
       data.append("gender", formData.gender);
 
-      // Combine address fields into one string
+      // ✅ Combine address fields into one string
       const fullAddress = [
         formData.streetAddress,
         formData.streetAddressLine2,
@@ -298,31 +299,25 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
         formData.postalCode,
         formData.country,
       ]
-        .filter(Boolean) // remove empty parts
+        .filter(Boolean)
         .join(", ");
       data.append("address", fullAddress);
 
       data.append("email", formData.email);
-
       data.append("mobileNumber", formData.mobileNumber);
       if (formData.phoneNumber)
         data.append("phoneNumber", formData.phoneNumber);
       if (formData.company) data.append("company", formData.company);
 
       data.append("cardNo", formData.cardNo);
-      if (formData.cardImage) {
+      if (formData.cardImage)
         data.append("cardImage", formData.cardImage as File);
-      }
 
       data.append("course", formData.course);
       data.append("status", formData.status);
-
-      // Map frontend levelOfEducation → backend educationLevel
       data.append("educationLevel", formData.levelOfEducation);
-
-      if (formData.additionalComments) {
+      if (formData.additionalComments)
         data.append("additionalComments", formData.additionalComments);
-      }
 
       console.log("Submitting form data:", Object.fromEntries(data.entries()));
 
@@ -338,13 +333,13 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
         setFileName("");
         if (onSubmit) onSubmit(formData);
       } else {
-        let errorMsg = "Submission failed";
+        const errorBody = await response.text();
+        let errorMsg;
         try {
-          const errJson = await response.json(); // ✅ backend sends JSON
-          errorMsg = errJson.message || errorMsg;
+          const errJson = JSON.parse(errorBody);
+          errorMsg = errJson.message || "Submission failed";
         } catch {
-          const errText = await response.text();
-          errorMsg = errText || errorMsg;
+          errorMsg = errorBody || "Submission failed";
         }
 
         setIsSubmitting(false);
@@ -356,7 +351,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
             .toLowerCase()
             .includes("mobile number and phone number already exists")
         ) {
-          alert(errorMsg); // ✅ exact backend message
+          alert(errorMsg);
         } else {
           alert("Submission failed: " + errorMsg);
         }
@@ -372,102 +367,6 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
     if (onSave) onSave(formData);
     else alert("Your progress has been saved!");
   };
-
-  //header
-  // const Header = (
-  //   <header className="bg-white shadow-md sticky top-0 z-50">
-  //     <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
-  //       <a href="/" className="flex items-center">
-  //         <img
-  //           src="/growtechafrica.png"
-  //           width={50}
-  //           height={80}
-  //           alt="GrowTechAfrica Logo"
-  //         />
-  //         <span className="text-2xl font-bold text-gray-800 ml-2">
-  //           GrowTechAfrica
-  //         </span>
-  //       </a>
-  //       <div className="hidden md:flex space-x-8">
-  //         <a
-  //           href="/#about"
-  //           className="text-gray-600 hover:text-grass-green transition duration-300"
-  //         >
-  //           About Us
-  //         </a>
-  //         <a
-  //           href="/#programs"
-  //           className="text-gray-600 hover:text-grass-green transition duration-300"
-  //         >
-  //           Programs
-  //         </a>
-  //         <a
-  //           href="/#Team"
-  //           className="text-gray-600 hover:text-grass-green transition duration-300"
-  //         >
-  //           Team
-  //         </a>
-  //         <a
-  //           href="/#partners"
-  //           className="text-gray-600 hover:text-grass-green transition duration-300"
-  //         >
-  //           Partners
-  //         </a>
-  //         <a
-  //           href="/#contact"
-  //           className="text-gray-600 hover:text-grass-green transition duration-300"
-  //         >
-  //           Contact
-  //         </a>
-  //       </div>
-  //       <div className="md:hidden">
-  //         <button
-  //           id="mobile-menu-button"
-  //           className="text-gray-600 focus:outline-none"
-  //         >
-  //           <svg
-  //             className="w-6 h-6"
-  //             fill="none"
-  //             stroke="currentColor"
-  //             viewBox="0 0 24 24"
-  //             xmlns="http://www.w3.org/2000/svg"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={2}
-  //               d="M4 6h16M4 12h16m-7 6h7"
-  //             ></path>
-  //           </svg>
-  //         </button>
-  //       </div>
-  //     </nav>
-  //     {/* Mobile Menu */}
-  //     <div id="mobile-menu" className="hidden md:hidden">
-  //       <a href="/#about" className="block py-2 px-4 text-sm hover:bg-gray-100">
-  //         About Us
-  //       </a>
-  //       <a
-  //         href="/#programs"
-  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
-  //       >
-  //         Programs
-  //       </a>
-  //       <a
-  //         href="/#partners"
-  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
-  //       >
-  //         Partners
-  //       </a>
-  //       <a
-  //         href="/#contact"
-  //         className="block py-2 px-4 text-sm hover:bg-gray-100"
-  //       >
-  //         Contact
-  //       </a>
-  //     </div>
-  //   </header>
-  // );
 
   // --- Header ---
   const Header = (
@@ -605,7 +504,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       </header>
 
       {/* Animation Styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes slideFade {
           from {
             opacity: 0;

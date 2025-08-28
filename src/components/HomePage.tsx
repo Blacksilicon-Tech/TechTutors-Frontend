@@ -347,7 +347,7 @@ const HomePage: React.FC = () => {
         )}
       </header>
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideFade {
           from {
             opacity: 0;
