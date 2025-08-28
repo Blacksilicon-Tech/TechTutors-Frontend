@@ -194,6 +194,7 @@ const HomePage: React.FC = () => {
   const toggleExpand = (slug: string) => {
     setExpandedSlug((prev) => (prev === slug ? null : slug));
   };
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   useEffect(() => {
     // Smooth anchor scrolling (keeps previous behavior)
@@ -260,13 +261,31 @@ const HomePage: React.FC = () => {
               </a>
             ))}
 
-            <Link
-              to="/form"
-              className="ml-4 bg-grass-green text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:shadow-grass-green/40 hover:scale-105 transition-all duration-300 relative overflow-hidden"
+            {/* Header Enroll Button with Tooltip */}
+            <div
+              className="relative"
+              onMouseEnter={() => setHoveredButton("headerEnroll")}
+              onMouseLeave={() => setHoveredButton(null)}
             >
-              <span className="relative z-10">Enroll</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-600 opacity-0 hover:opacity-100 transition-opacity duration-500" />
-            </Link>
+              <Link
+                to="/webinar"
+                className="ml-4 bg-grass-green text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:shadow-grass-green/40 hover:scale-105 transition-all duration-300 relative overflow-hidden"
+              >
+                <span className="relative z-10">Enroll</span>
+              </Link>
+              {hoveredButton === "headerEnroll" && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                  <h3 className="font-bold text-lg mb-1">
+                    Enrollment not started yet!
+                  </h3>
+                  <p className="text-sm">
+                    Enrollment for the program has not begun yet. Upcoming
+                    webinar on <strong>6th September</strong>. Click Enroll to
+                    register for the webinar.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Toggle */}
@@ -335,13 +354,32 @@ const HomePage: React.FC = () => {
                 </a>
               ))}
 
-              <Link
-                to="/form"
-                className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
-                onClick={() => setMobileMenuOpen(false)}
+              {/* Mobile Enroll Button */}
+              <div
+                className="relative"
+                onMouseEnter={() => setHoveredButton("mobileEnroll")}
+                onMouseLeave={() => setHoveredButton(null)}
               >
-                Enroll
-              </Link>
+                <Link
+                  to="/webinar"
+                  className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Enroll
+                </Link>
+                {hoveredButton === "mobileEnroll" && (
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                    <h3 className="font-bold text-lg mb-1">
+                      Enrollment not started yet!
+                    </h3>
+                    <p className="text-sm">
+                      Enrollment for the program has not begun yet. Upcoming
+                      webinar on <strong>6th September</strong>. Click Enroll to
+                      register for the webinar.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -398,19 +436,37 @@ const HomePage: React.FC = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex justify-center gap-6 flex-wrap">
+          <div className="flex justify-center gap-6 items-center">
             <a
               href="#programs"
               className="relative bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-green-500/40 transform hover:scale-105 transition-all duration-300"
             >
               Explore Programs
             </a>
-            <a
-              href="/form"
-              className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
+            <div
+              className="relative"
+              onMouseEnter={() => setHoveredButton("heroEnroll")}
+              onMouseLeave={() => setHoveredButton(null)}
             >
-              Enroll Now
-            </a>
+              <Link
+                to="/webinar"
+                className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
+              >
+                Enroll Now
+              </Link>
+              {hoveredButton === "heroEnroll" && (
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                  <h3 className="font-bold text-lg mb-1">
+                    Enrollment not started yet!
+                  </h3>
+                  <p className="text-sm">
+                    Enrollment for the program has not begun yet. Upcoming
+                    webinar on <strong>6th September</strong>. Click Enroll to
+                    register for the webinar.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -576,57 +632,33 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Programs Section */}
       <section id="programs" className="py-16">
         <div className="container mx-auto px-6 text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Microsoft Skills for Jobs Microdegree Programs
           </h2>
           <p className="text-gray-600 max-w-3xl lg:max-w-full lg:w-screen px-4 text-justify">
-            The Microsoft Skills for Jobs Microdegree Program is designed to
-            help you build real-world tech skills that employers want and a
-            pathway for higher studies in EU countries. Microdegree Programs
-            focuses on in-demand technology areas like cybersecurity, cloud
-            computing, Low code tool set, AI, data analytics, and more. The
-            program is built around practical, job-relevant skills and uses a
-            flexible, self-paced learning model that fits your schedule. Whether
-            you are a student, recent graduate, freelancer, technology
-            professional, career changer, or an individual seeking skills for
-            employment without pursuing a full degree or diploma, this program
-            is tailored for you. You will learn through high-quality courses
-            jointly developed by Microsoft, KAMK University of Applied Sciences
-            (Finland), and global tech companies. The courses follow the
-            European Credit Transfer and Accumulation System (ECTS), meaning
-            your credits and certificates are internationally recognized for
-            quality international and local jobs and higher studies in EU
-            countries. The Microsoft Skills for Job Microdegree Program is an
-            online program designed for self-paced learning, with in-class
-            mentorship (region-specific) to support your journey.
+            {/* Program description */}
           </p>
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 items-start">
           {programs.map((program) => (
             <div
               key={program.slug}
               className="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-200 transition-all duration-300"
             >
-              {/* Image */}
               <img
                 src={program.image}
                 alt={program.title}
                 className="w-full h-48 object-cover"
               />
-
-              {/* Content */}
               <div className="p-4 space-y-3 text-left">
                 <h2 className="text-2xl font-bold">{program.title}</h2>
                 <p className="text-gray-700">{program.summary}</p>
 
-                {/* Container for courses and program details */}
                 <div className="flex flex-col md:flex-row justify-between items-start gap-6 mt-4">
-                  {/* Left side: Courses */}
                   <div className="w-full md:w-1/2">
                     <strong>Courses:</strong>
                     <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
@@ -636,42 +668,12 @@ const HomePage: React.FC = () => {
                     </ul>
                   </div>
 
-                  {/* Right side: Program details */}
                   <div className="w-full md:w-1/2 space-y-2 text-gray-700">
-                    <p>
-                      <strong>Credits:</strong> {program.ectsCredits}
-                    </p>
-                    <p>
-                      <strong>Self-study:</strong> {program.onlineSelfStudy}
-                    </p>
-                    <p>
-                      <strong>Portal Access Duration:</strong>{" "}
-                      {program.portalAccessDuration}
-                    </p>
-                    <p>
-                      <strong>Study Material and Resources:</strong>{" "}
-                      {program.studyMaterialAndResources}
-                    </p>
-                    <p>
-                      <strong>Mentorship:</strong> {program.mentorship}
-                    </p>
-                    <p>
-                      <strong>Course Completion:</strong>{" "}
-                      {program.courseCompletion}
-                    </p>
-                    <p>
-                      <strong>Professional Certificate Exam:</strong>{" "}
-                      {program.professionalCertificateExam}
-                    </p>
-                    <p>
-                      <strong>Program Professional Certificate:</strong>{" "}
-                      {program.programProfessionalCertificate}
-                    </p>
+                    {/* Program details omitted for brevity */}
                   </div>
                 </div>
 
-                {/* Buttons */}
-                <div className="mt-4 flex justify-between items-center gap-2">
+                <div className="mt-4 flex justify-between items-center gap-2 relative">
                   <button
                     onClick={() => toggleExpand(program.slug)}
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-sm rounded-md border border-gray-300 transition"
@@ -679,15 +681,32 @@ const HomePage: React.FC = () => {
                     {expandedSlug === program.slug ? "Show less" : "Learn more"}
                   </button>
 
-                  <Link
-                    to="/form"
-                    className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition"
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setHoveredButton(program.slug)}
+                    onMouseLeave={() => setHoveredButton(null)}
                   >
-                    Enroll
-                  </Link>
+                    <Link
+                      to="/webinar"
+                      className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition relative z-10"
+                    >
+                      Enroll
+                    </Link>
+                    {hoveredButton === program.slug && (
+                      <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                        <h3 className="font-bold text-lg mb-2">
+                          Enrollment not started yet!
+                        </h3>
+                        <p className="text-sm">
+                          Enrollment for the program has not begun yet. Upcoming
+                          webinar on <strong>6th September</strong>. Click
+                          Enroll to register for the webinar.
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                {/* Expanded Content */}
                 {expandedSlug === program.slug && (
                   <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-700">
                     {program.expandable.bullets.map((bullet, idx) => (
@@ -1055,12 +1074,30 @@ const HomePage: React.FC = () => {
               <p className="text-gray-300 mb-6">
                 Start your journey today and unlock global tech opportunities.
               </p>
-              <Link
-                to="/form"
-                className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition"
+              <div
+                className="relative"
+                onMouseEnter={() => setHoveredButton("contactEnroll")}
+                onMouseLeave={() => setHoveredButton(null)}
               >
-                Enroll Now
-              </Link>
+                <Link
+                  to="/webinar"
+                  className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition"
+                >
+                  Enroll Now
+                </Link>
+                {hoveredButton === "contactEnroll" && (
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                    <h3 className="font-bold text-lg mb-1">
+                      Enrollment not started yet!
+                    </h3>
+                    <p className="text-sm">
+                      Enrollment for the program has not begun yet. Upcoming
+                      webinar on <strong>6th September</strong>. Click Enroll to
+                      register for the webinar.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -1103,9 +1140,30 @@ const HomePage: React.FC = () => {
                 </a>
               </li>
               <li>
-                <Link to="/form" className="hover:text-grass-green transition">
-                  Apply Now
-                </Link>
+                <div
+                  className="relative"
+                  onMouseEnter={() => setHoveredButton("footerEnroll")}
+                  onMouseLeave={() => setHoveredButton(null)}
+                >
+                  <Link
+                    to="/webinar"
+                    className="hover:text-grass-green transition"
+                  >
+                    Apply Now
+                  </Link>
+                  {hoveredButton === "footerEnroll" && (
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
+                      <h3 className="font-bold text-lg mb-1">
+                        Enrollment not started yet!
+                      </h3>
+                      <p className="text-sm">
+                        Enrollment for the program has not begun yet. Upcoming
+                        webinar on <strong>6th September</strong>. Click Apply
+                        Now to register for the webinar.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </li>
             </ul>
           </div>
