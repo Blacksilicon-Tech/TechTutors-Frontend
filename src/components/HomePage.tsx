@@ -19,13 +19,11 @@ type Program = {
   programProfessionalCertificate: string;
   expandable?: { bullets: string[] };
 };
-
 const programs: Program[] = [
   {
     slug: "cloud-and-cybersecurity",
     title: "Cloud and Cybersecurity",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+    image: "cloud&cybersecurity.jpg",
     summary:
       "The Cloud and Cybersecurity program equips learners with the knowledge and skills to design, secure, and manage modern cloud environments using Microsoft Azure and cybersecurity best practices. It covers foundational concepts, hands-on administration, security technologies, and advanced architectural strategies to protect data, applications, and infrastructure from evolving cyber threats.",
     courses: [
@@ -58,8 +56,7 @@ const programs: Program[] = [
   {
     slug: "ai-developer",
     title: "AI Developer",
-    image:
-      "https://images.unsplash.com/photo-1667372391477-bf2b4e6c6418?auto=format&fit=crop&w=1200&q=80",
+    image: "aidev.jpg",
     summary:
       "The AI Developer program equips learners with the technical expertise to design, build, and deploy intelligent solutions using Microsoft Azure and modern AI frameworks. It covers core AI principles, data analytics, development workflows, cloud-native data storage, and advanced AI development practices to prepare learners for real-world AI-driven projects and solutions.",
     courses: [
@@ -90,12 +87,10 @@ const programs: Program[] = [
       ],
     },
   },
-
   {
     slug: "power-platform",
     title: "Power Platform (PP)",
-    image:
-      "https://images.unsplash.com/photo-1633265486064-086b219458ec?auto=format&fit=crop&w=1200&q=80",
+    image: "powerplatform.jpg",
     summary:
       "The Power Platform (PP) program equips learners with the knowledge and practical skills needed to design, build, and deploy business solutions using Microsoft Power Platform tools. It covers core fundamentals, app development, solution architecture, and functional consulting to help learners create efficient, low-code applications and automate business processes seamlessly.",
     courses: [
@@ -123,12 +118,10 @@ const programs: Program[] = [
       ],
     },
   },
-
   {
     slug: "data-engineer",
     title: "Data Engineer",
-    image:
-      "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
+    image: "dataengineer.jpg",
     summary:
       "The Data Engineer program equips learners with the technical expertise to design, build, and manage scalable data solutions using Microsoft Azure and modern data engineering tools. It covers core Azure services, data analytics, AI integration, and advanced engineering techniques to prepare learners for real-world data-driven projects and enterprise solutions.",
     courses: [
@@ -161,8 +154,7 @@ const programs: Program[] = [
   {
     slug: "data-analyst",
     title: "Data Analyst",
-    image:
-      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=1200&q=80",
+    image: "dataanalyst.jpg",
     summary:
       "The Data Analyst program equips learners with the skills to collect, process, analyze, and visualize data using Microsoft Azure, Power BI, and modern analytics tools. It focuses on transforming raw data into actionable insights, building dynamic reports, and leveraging AI and Fabric for advanced data analytics and business intelligence solutions.",
     courses: [
