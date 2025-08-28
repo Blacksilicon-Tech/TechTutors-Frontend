@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const WEBINAL_URL = import.meta.env.VITE_GTECH_WEBINAL_URL;
-const WEBINAL_TOKEN = import.meta.env.VITE_GTECH_WEBINAR_TOKEN;
+const WEBINAL_TOKEN = import.meta.env.VITE_GTECH_WEBINAL_TOKEN;
 
 const Webinar: React.FC = () => {
   const [form, setForm] = useState({
@@ -25,7 +25,7 @@ const Webinar: React.FC = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${WEBINAL_TOKEN}`,
+          Authorization: WEBINAL_TOKEN,
         },
         body: JSON.stringify(form),
       });
