@@ -555,6 +555,8 @@ const HomePage: React.FC = () => {
                 to="/webinar"
                 className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
                 onClick={handleHeroClick}
+                onMouseEnter={() => setHoveredButton("heroEnroll")}
+                onMouseLeave={() => setHoveredButton(null)}
               >
                 Enroll Now
               </Link>
@@ -565,17 +567,14 @@ const HomePage: React.FC = () => {
                   <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 leading-relaxed">
                     Enrollment for the programs has not started yet. However,
-                    there is an upcoming
-                    <strong className="text-blue-600"> webinar </strong> on
+                    there is an upcoming{" "}
+                    <strong className="text-blue-600">webinar</strong> on{" "}
                     <strong className="text-green-600">
-                      {" "}
                       6th September 2025
                     </strong>
-                    . Click <strong className="text-amber-600">
-                      Enroll
-                    </strong>{" "}
+                    . Click <strong className="text-amber-600">Enroll</strong>{" "}
                     to register for the webinar.
                   </p>
                 </div>
@@ -587,12 +586,11 @@ const HomePage: React.FC = () => {
                   <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 leading-relaxed">
                     Enrollment for the programs has not started yet. However,
-                    there is an upcoming
-                    <strong className="text-blue-600"> webinar </strong> on
+                    there is an upcoming{" "}
+                    <strong className="text-blue-600">webinar</strong> on{" "}
                     <strong className="text-green-600">
-                      {" "}
                       6th September 2025
                     </strong>
                     . Tap <strong className="text-amber-600">Enroll</strong> to
