@@ -375,15 +375,21 @@ const HomePage: React.FC = () => {
               </Link>
               {hoveredButton === "headerEnroll" && (
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                  <h3 className="font-bold text-lg mb-1">
+                  <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
-                  <p className="text-sm">
-                    Enrollment for the programs have not started yet. But there
-                    is an upcoming
-                    <strong>webinar</strong>webinar on{" "}
-                    <strong>6th September</strong>. Click Enroll to register for
-                    the webinar.
+                  <p className="text-sm text-gray-700">
+                    Enrollment for the programs has not started yet. However,
+                    there is an upcoming
+                    <strong className="text-blue-600"> webinar </strong> on
+                    <strong className="text-green-600">
+                      {" "}
+                      6th September 2025
+                    </strong>
+                    . Click <strong className="text-amber-600">
+                      Enroll
+                    </strong>{" "}
+                    to register for the webinar.
                   </p>
                 </div>
               )}
@@ -460,15 +466,21 @@ const HomePage: React.FC = () => {
 
                 {mobileHeaderTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                    <h3 className="font-bold text-lg mb-1">
+                    <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
-                    <p className="text-sm">
-                      Enrollment for the programs have not started yet. But
+                    <p className="text-sm text-gray-700">
+                      Enrollment for the programs has not started yet. However,
                       there is an upcoming
-                      <strong>webinar</strong>webinar on{" "}
-                      <strong>6th September</strong>. Click Enroll to register
-                      for the webinar.
+                      <strong className="text-blue-600"> webinar </strong> on
+                      <strong className="text-green-600">
+                        {" "}
+                        6th September 2025
+                      </strong>
+                      . Tap <strong className="text-amber-600">
+                        Enroll
+                      </strong>{" "}
+                      to register for the webinar.
                     </p>
                   </div>
                 )}
@@ -550,15 +562,21 @@ const HomePage: React.FC = () => {
               {/* Desktop tooltip */}
               {hoveredButton === "heroEnroll" && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                  <h3 className="font-bold text-lg mb-1">
+                  <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
-                  <p className="text-sm">
-                    Enrollment for the programs have not started yet. But there
-                    is an upcoming
-                    <strong>webinar</strong>webinar on{" "}
-                    <strong>6th September</strong>. Click Enroll to register for
-                    the webinar.
+                  <p className="text-sm text-gray-700">
+                    Enrollment for the programs has not started yet. However,
+                    there is an upcoming
+                    <strong className="text-blue-600"> webinar </strong> on
+                    <strong className="text-green-600">
+                      {" "}
+                      6th September 2025
+                    </strong>
+                    . Click <strong className="text-amber-600">
+                      Enroll
+                    </strong>{" "}
+                    to register for the webinar.
                   </p>
                 </div>
               )}
@@ -566,15 +584,19 @@ const HomePage: React.FC = () => {
               {/* Mobile tooltip */}
               {mobileHeroTooltipVisible && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                  <h3 className="font-bold text-lg mb-1">
+                  <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
-                  <p className="text-sm">
-                    Enrollment for the programs have not started yet. But there
-                    is an upcoming
-                    <strong>webinar</strong>webinar on{" "}
-                    <strong>6th September</strong>. Click Enroll to register for
-                    the webinar.
+                  <p className="text-sm text-gray-700">
+                    Enrollment for the programs has not started yet. However,
+                    there is an upcoming
+                    <strong className="text-blue-600"> webinar </strong> on
+                    <strong className="text-green-600">
+                      {" "}
+                      6th September 2025
+                    </strong>
+                    . Tap <strong className="text-amber-600">Enroll</strong> to
+                    register for the webinar.
                   </p>
                 </div>
               )}
@@ -811,14 +833,23 @@ const HomePage: React.FC = () => {
                     {/* Desktop tooltip */}
                     {hoveredButton === program.slug && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                        <h3 className="font-bold text-lg mb-1">
+                        <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
-                        <p className="text-sm">
-                          Enrollment for the programs have not started yet. But
-                          there is an upcoming
-                          <strong>webinar</strong>webinar on{" "}
-                          <strong>6th September</strong>. Click Enroll to
+                        <p className="text-sm text-gray-700">
+                          Enrollment for the programs has not started yet.
+                          However, there is an upcoming
+                          <strong className="text-blue-600">
+                            {" "}
+                            webinar{" "}
+                          </strong>{" "}
+                          on
+                          <strong className="text-green-600">
+                            {" "}
+                            6th September 2025
+                          </strong>
+                          . Click{" "}
+                          <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
                         </p>
                       </div>
@@ -827,14 +858,23 @@ const HomePage: React.FC = () => {
                     {/* Mobile tooltip */}
                     {mobileProgramsTooltipVisible[program.slug] && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                        <h3 className="font-bold text-lg mb-1">
+                        <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
-                        <p className="text-sm">
-                          Enrollment for the programs have not started yet. But
-                          there is an upcoming
-                          <strong>webinar</strong>webinar on{" "}
-                          <strong>6th September</strong>. Click Enroll to
+                        <p className="text-sm text-gray-700">
+                          Enrollment for the programs has not started yet.
+                          However, there is an upcoming
+                          <strong className="text-blue-600">
+                            {" "}
+                            webinar{" "}
+                          </strong>{" "}
+                          on
+                          <strong className="text-green-600">
+                            {" "}
+                            6th September 2025
+                          </strong>
+                          . Tap{" "}
+                          <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
                         </p>
                       </div>
@@ -1228,15 +1268,21 @@ const HomePage: React.FC = () => {
                 {/* Desktop tooltip */}
                 {hoveredButton === "contactEnroll" && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                    <h3 className="font-bold text-lg mb-1">
+                    <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
-                    <p className="text-sm">
-                      Enrollment for the programs have not started yet. But
+                    <p className="text-sm text-gray-700">
+                      Enrollment for the programs has not started yet. However,
                       there is an upcoming
-                      <strong>webinar</strong>webinar on{" "}
-                      <strong>6th September</strong>. Click Enroll to register
-                      for the webinar.
+                      <strong className="text-blue-600"> webinar </strong> on
+                      <strong className="text-green-600">
+                        {" "}
+                        6th September 2025
+                      </strong>
+                      . Click <strong className="text-amber-600">
+                        Enroll
+                      </strong>{" "}
+                      to register for the webinar.
                     </p>
                   </div>
                 )}
@@ -1244,15 +1290,21 @@ const HomePage: React.FC = () => {
                 {/* Mobile tooltip */}
                 {mobileContactTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                    <h3 className="font-bold text-lg mb-1">
+                    <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
-                    <p className="text-sm">
-                      Enrollment for the programs have not started yet. But
+                    <p className="text-sm text-gray-700">
+                      Enrollment for the programs has not started yet. However,
                       there is an upcoming
-                      <strong>webinar</strong>webinar on{" "}
-                      <strong>6th September</strong>. Click Enroll to register
-                      for the webinar.
+                      <strong className="text-blue-600"> webinar </strong> on
+                      <strong className="text-green-600">
+                        {" "}
+                        6th September 2025
+                      </strong>
+                      . Tap <strong className="text-amber-600">
+                        Enroll
+                      </strong>{" "}
+                      to register for the webinar.
                     </p>
                   </div>
                 )}
@@ -1316,14 +1368,19 @@ const HomePage: React.FC = () => {
                   {/* Desktop tooltip */}
                   {hoveredButton === "footerEnroll" && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                      <h3 className="font-bold text-lg mb-1">
+                      <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
-                      <p className="text-sm">
-                        Enrollment for the programs have not started yet. But
-                        there is an upcoming
-                        <strong>webinar</strong>webinar on{" "}
-                        <strong>6th September</strong>. Click Apply Now to
+                      <p className="text-sm text-gray-700">
+                        Enrollment for the programs has not started yet.
+                        However, there is an upcoming
+                        <strong className="text-blue-600"> webinar </strong> on
+                        <strong className="text-green-600">
+                          {" "}
+                          6th September 2025
+                        </strong>
+                        . Click{" "}
+                        <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
                       </p>
                     </div>
@@ -1332,14 +1389,19 @@ const HomePage: React.FC = () => {
                   {/* Mobile tooltip above the button */}
                   {mobileFooterTooltipVisible && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                      <h3 className="font-bold text-lg mb-1">
+                      <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
-                      <p className="text-sm">
-                        Enrollment for the programs have not started yet. But
-                        there is an upcoming
-                        <strong>webinar</strong>webinar on{" "}
-                        <strong>6th September</strong>. Click Apply Now to
+                      <p className="text-sm text-gray-700">
+                        Enrollment for the programs has not started yet.
+                        However, there is an upcoming
+                        <strong className="text-blue-600"> webinar </strong> on
+                        <strong className="text-green-600">
+                          {" "}
+                          6th September 2025
+                        </strong>
+                        . Tap{" "}
+                        <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
                       </p>
                     </div>
