@@ -6,6 +6,7 @@ import Webinar from "./components/Webinar";
 import "./App.css";
 import PaymentVerifyPage from "./components/PaymentVerifyPage";
 import PaymentPage from "./components/PaymentPage";
+import PaymentRetryPage from "./components/PaymentRetryPage";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="/form" element={<FormPage />} />
         <Route path="/webinar" element={<Webinar />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/paymentverify" element={<PaymentVerifyPage />} />
+        <Route path="/payment/verify" element={<PaymentVerifyPage />} />
+        <Route path="/payment/retry" element={<PaymentRetryPage />} />
       </Routes>
     </Router>
   );
