@@ -368,14 +368,14 @@ const HomePage: React.FC = () => {
               onMouseLeave={() => setHoveredButton(null)}
             >
               <Link
-                to="/webinar"
+                to="/form"
                 className="ml-4 bg-grass-green text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:shadow-grass-green/40 hover:scale-105 transition-all duration-300 relative overflow-hidden"
               >
                 <span className="relative z-10">Enroll</span>
               </Link>
               {hoveredButton === "headerEnroll" && (
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                  <h3 className="font-bold text-lg mb-1 text-red-600">
+                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700">
@@ -390,7 +390,7 @@ const HomePage: React.FC = () => {
                       Enroll
                     </strong>{" "}
                     to register for the webinar.
-                  </p>
+                  </p> */}
                 </div>
               )}
             </div>
@@ -457,7 +457,7 @@ const HomePage: React.FC = () => {
               {/* Mobile Enroll Button */}
               <div className="relative" ref={mobileHeaderRef}>
                 <Link
-                  to="/webinar"
+                  to="/form"
                   className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
                   onClick={handleMobileHeaderClick}
                 >
@@ -466,7 +466,7 @@ const HomePage: React.FC = () => {
 
                 {mobileHeaderTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                    <h3 className="font-bold text-lg mb-1 text-red-600">
+                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -481,7 +481,7 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p>
+                    </p> */}
                   </div>
                 )}
               </div>
@@ -552,7 +552,7 @@ const HomePage: React.FC = () => {
             {/* Enroll Now Button */}
             <div className="relative" ref={heroEnrollRef}>
               <Link
-                to="/webinar"
+                to="/form"
                 className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
                 onClick={handleHeroClick}
                 onMouseEnter={() => setHoveredButton("heroEnroll")}
@@ -564,7 +564,7 @@ const HomePage: React.FC = () => {
               {/* Desktop tooltip */}
               {hoveredButton === "heroEnroll" && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                  <h3 className="font-bold text-lg mb-1 text-red-600">
+                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700 leading-relaxed">
@@ -576,14 +576,14 @@ const HomePage: React.FC = () => {
                     </strong>
                     . Click <strong className="text-amber-600">Enroll</strong>{" "}
                     to register for the webinar.
-                  </p>
+                  </p> */}
                 </div>
               )}
 
               {/* Mobile tooltip */}
               {mobileHeroTooltipVisible && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                  <h3 className="font-bold text-lg mb-1 text-red-600">
+                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700 leading-relaxed">
@@ -595,7 +595,7 @@ const HomePage: React.FC = () => {
                     </strong>
                     . Tap <strong className="text-amber-600">Enroll</strong> to
                     register for the webinar.
-                  </p>
+                  </p> */}
                 </div>
               )}
             </div>
@@ -821,7 +821,7 @@ const HomePage: React.FC = () => {
                     onMouseLeave={() => setHoveredButton(null)}
                   >
                     <Link
-                      to="/webinar"
+                      to="/form"
                       className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition relative z-10"
                       onClick={(e) => handleProgramClick(program.slug, e)}
                     >
@@ -831,7 +831,7 @@ const HomePage: React.FC = () => {
                     {/* Desktop tooltip */}
                     {hoveredButton === program.slug && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                        <h3 className="font-bold text-lg mb-1 text-red-600">
+                        {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
                         <p className="text-sm text-gray-700">
@@ -849,14 +849,14 @@ const HomePage: React.FC = () => {
                           . Click{" "}
                           <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
-                        </p>
+                        </p> */}
                       </div>
                     )}
 
                     {/* Mobile tooltip */}
                     {mobileProgramsTooltipVisible[program.slug] && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                        <h3 className="font-bold text-lg mb-1 text-red-600">
+                        {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
                         <p className="text-sm text-gray-700">
@@ -874,7 +874,7 @@ const HomePage: React.FC = () => {
                           . Tap{" "}
                           <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
-                        </p>
+                        </p> */}
                       </div>
                     )}
                   </div>
@@ -1256,7 +1256,7 @@ const HomePage: React.FC = () => {
                 onMouseLeave={() => setHoveredButton(null)}
               >
                 <Link
-                  to="/webinar"
+                  to="/form"
                   className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition relative z-10"
                   onClick={handleContactClick}
                 >
@@ -1266,7 +1266,7 @@ const HomePage: React.FC = () => {
                 {/* Desktop tooltip */}
                 {hoveredButton === "contactEnroll" && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                    <h3 className="font-bold text-lg mb-1 text-red-600">
+                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -1281,14 +1281,14 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p>
+                    </p> */}
                   </div>
                 )}
 
                 {/* Mobile tooltip */}
                 {mobileContactTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                    <h3 className="font-bold text-lg mb-1 text-red-600">
+                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -1303,7 +1303,7 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p>
+                    </p> */}
                   </div>
                 )}
               </div>
@@ -1366,7 +1366,7 @@ const HomePage: React.FC = () => {
                   {/* Desktop tooltip */}
                   {hoveredButton === "footerEnroll" && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                      <h3 className="font-bold text-lg mb-1 text-red-600">
+                      {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
                       <p className="text-sm text-gray-700">
@@ -1380,14 +1380,14 @@ const HomePage: React.FC = () => {
                         . Click{" "}
                         <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
-                      </p>
+                      </p> */}
                     </div>
                   )}
 
                   {/* Mobile tooltip above the button */}
                   {mobileFooterTooltipVisible && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                      <h3 className="font-bold text-lg mb-1 text-red-600">
+                      {/* <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
                       <p className="text-sm text-gray-700">
@@ -1401,7 +1401,7 @@ const HomePage: React.FC = () => {
                         . Tap{" "}
                         <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
-                      </p>
+                      </p> */}
                     </div>
                   )}
                 </div>
