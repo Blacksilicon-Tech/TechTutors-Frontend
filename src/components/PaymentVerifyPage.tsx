@@ -1,0 +1,52 @@
+import { useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+
+const PaymentVerifyPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("Verifying payment...");
+
+  useEffect(() => {
+    const verifyPayment = async () => {
+      const reference = searchParams.get("reference"); // ✅ Paystack sends reference
+      const token = searchParams.get("token"); // carry token for retry page
+
+      if (!reference) {
+        setMessage("Invalid payment verification link.");
+        return;
+      }
+
+      try {
+        // ✅ Ask backend for latest status
+        const res = await fetch(`/api/payments/status?tx_ref=${reference}`);
+        if (!res.ok) throw new Error("Verification failed");
+
+        const data: { status: string } = await res.json();
+
+        if (data.status === "SUCCESSFUL") {
+          setMessage("✅ Payment successful! Redirecting...");
+          setTimeout(() => navigate("/"), 2000); // ✅ Home after success
+        } else {
+          setMessage("❌ Payment failed. Redirecting to retry...");
+          setTimeout(() => navigate(`/payment/retry?token=${token}`), 2000);
+        }
+      } catch (err) {
+        setMessage("⚠️ Error verifying payment. Redirecting to retry...");
+        setTimeout(() => navigate(`/payment/retry?token=${token}`), 2000);
+      }
+    };
+
+    verifyPayment();
+  }, [searchParams, navigate]);
+
+  return (
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg p-6 text-center">
+        <h1 className="text-xl font-bold mb-2">Payment Verification</h1>
+        <p>{message}</p>
+      </div>
+    </div>
+  );
+};
+
+export default PaymentVerifyPage;

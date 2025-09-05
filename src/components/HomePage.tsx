@@ -1356,7 +1356,7 @@ const HomePage: React.FC = () => {
                   onMouseLeave={() => setHoveredButton(null)}
                 >
                   <Link
-                    to="/webinar"
+                    to="/form"
                     className="hover:text-grass-green transition"
                     onClick={handleFooterClick}
                   >

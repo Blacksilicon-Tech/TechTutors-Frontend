@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Upload,
   FileText,
@@ -40,11 +41,11 @@ const defaultCountries = [
   "Canada",
 ];
 const defaultCourses = [
-  "Cloud and Cybersecurity",
-  "AI Developer",
-  "Power Platform (PP)",
-  "Data Engineer",
-  "Data Analyst",
+  "Cloud and Cybersecurity – ₦496,000",
+  "AI Developer – ₦416,000",
+  "Power Platform (PP) – ₦384,000",
+  "Data Engineer – ₦400,000",
+  "Data Analyst – ₦400,000",
 ];
 const defaultStatuses = ["Student", "Employed", "Unemployed", "Other"];
 const defaultEducationLevels = [
@@ -322,6 +323,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       console.log("Submitting form data:", Object.fromEntries(data.entries()));
 
       const response = await fetch(
+        // "http://localhost:8080/api/registration",
         "https://api-growtechafrica.blacksillicon.com/api/registration",
         {
           method: "POST",
@@ -572,12 +574,20 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
               Thank you for applying to the {programTitle}. We have received
               your information.
             </p>
-            <button
-              onClick={() => setIsSubmitted(false)}
-              className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
-            >
-              Submit Another Application
-            </button>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300"
+              >
+                Submit Another Application
+              </button>
+
+              <Link to="/">
+                <button className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                  Back to Home
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
         {/* Tailwind custom styles (same as HomePage) */}
