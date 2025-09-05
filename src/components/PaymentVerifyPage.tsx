@@ -8,31 +8,35 @@ const PaymentVerifyPage: React.FC = () => {
 
   useEffect(() => {
     const verifyPayment = async () => {
-      const reference = searchParams.get("reference"); // ✅ Paystack sends reference
-      const token = searchParams.get("token"); // carry token for retry page
+      // Paystack sends both `trxref` and `reference`
+      const txRef = searchParams.get("reference") || searchParams.get("trxref");
+      const token = searchParams.get("token"); // optional, for retry flow
 
-      if (!reference) {
+      if (!txRef) {
         setMessage("Invalid payment verification link.");
         return;
       }
 
       try {
         // ✅ Ask backend for latest status
-        const res = await fetch(`/api/payments/status?tx_ref=${reference}`);
+        const res = await fetch(`/api/payments/status?tx_ref=${txRef}`);
         if (!res.ok) throw new Error("Verification failed");
 
         const data: { status: string } = await res.json();
 
-        if (data.status === "SUCCESSFUL") {
+        if (data.status?.toUpperCase() === "SUCCESSFUL") {
           setMessage("✅ Payment successful! Redirecting...");
-          setTimeout(() => navigate("/"), 2000); // ✅ Home after success
+          setTimeout(() => navigate("/"), 2000);
         } else {
           setMessage("❌ Payment failed. Redirecting to retry...");
-          setTimeout(() => navigate(`/payment/retry?token=${token}`), 2000);
+          setTimeout(
+            () => navigate(`/payment/retry?token=${token ?? ""}`),
+            2000
+          );
         }
       } catch (err) {
         setMessage("⚠️ Error verifying payment. Redirecting to retry...");
-        setTimeout(() => navigate(`/payment/retry?token=${token}`), 2000);
+        setTimeout(() => navigate(`/payment/retry?token=${token ?? ""}`), 2000);
       }
     };
 
