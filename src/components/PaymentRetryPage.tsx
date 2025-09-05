@@ -1,42 +1,14 @@
-import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-
-interface RegistrationResponse {
-  course: string;
-  amount: number;
-}
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const PaymentRetryPage: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const token = searchParams.get("token");
-  const [course, setCourse] = useState<string | null>(null);
-  const [amount, setAmount] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      if (!token) return;
-
-      try {
-        const res = await fetch(`/api/registrations/by-token?token=${token}`);
-        if (!res.ok) throw new Error("Failed to fetch registration details");
-
-        const data: RegistrationResponse = await res.json();
-        setCourse(data.course);
-        setAmount(data.amount);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDetails();
-  }, [token]);
+  const [loading, setLoading] = useState(false);
 
   const handleRetry = async () => {
     if (!token) return;
+    setLoading(true);
 
     try {
       const res = await fetch(`/api/payments/create?token=${token}`, {
@@ -46,37 +18,26 @@ const PaymentRetryPage: React.FC = () => {
 
       const data: { checkoutUrl: string } = await res.json();
       window.location.href = data.checkoutUrl;
-    } catch (err) {
+    } catch {
+      setLoading(false);
       alert("Error retrying payment. Please contact support.");
     }
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Loading retry page...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 text-center max-w-md">
         <h1 className="text-xl font-bold mb-4">Retry Payment</h1>
-        <p className="mb-2">
-          Course: <span className="font-semibold">{course ?? "Unknown"}</span>
-        </p>
-        <p className="mb-6">
-          Amount:{" "}
-          <span className="font-semibold">
-            {amount !== null ? `₦${amount}` : "N/A"}
-          </span>
-        </p>
+        <p className="mb-6">Click below to try your payment again.</p>
         <button
           onClick={handleRetry}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          disabled={loading}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center justify-center gap-2 disabled:opacity-70"
         >
-          Retry Payment
+          {loading && (
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          )}
+          {loading ? "Processing..." : "Retry Payment"}
         </button>
       </div>
     </div>
