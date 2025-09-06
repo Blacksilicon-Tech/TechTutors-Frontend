@@ -193,106 +193,106 @@ const HomePage: React.FC = () => {
     setExpandedSlug((prev) => (prev === slug ? null : slug));
   };
   // State & refs for each mobile tooltip
-  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  // const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
-  const [mobileHeaderTooltipVisible, setMobileHeaderTooltipVisible] =
-    useState(false);
-  const mobileHeaderRef = useRef<HTMLDivElement>(null);
-  const [mobileHeroTooltipVisible, setMobileHeroTooltipVisible] =
-    useState(false);
-  const heroEnrollRef = useRef<HTMLDivElement>(null);
+  // const [mobileHeaderTooltipVisible, setMobileHeaderTooltipVisible] =
+  //   useState(false);
+  // const mobileHeaderRef = useRef<HTMLDivElement>(null);
+  // const [mobileHeroTooltipVisible, setMobileHeroTooltipVisible] =
+  //   useState(false);
+  // const heroEnrollRef = useRef<HTMLDivElement>(null);
 
-  const [mobileProgramsTooltipVisible, setMobileProgramsTooltipVisible] =
-    useState<Record<string, boolean>>({});
-  const programsEnrollRef = useRef<Record<string, HTMLDivElement | null>>({});
+  // const [mobileProgramsTooltipVisible, setMobileProgramsTooltipVisible] =
+  //   useState<Record<string, boolean>>({});
+  // const programsEnrollRef = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const [mobileContactTooltipVisible, setMobileContactTooltipVisible] =
-    useState(false);
-  const contactEnrollRef = useRef<HTMLDivElement>(null);
+  // const [mobileContactTooltipVisible, setMobileContactTooltipVisible] =
+  //   useState(false);
+  // const contactEnrollRef = useRef<HTMLDivElement>(null);
 
-  const [mobileFooterTooltipVisible, setMobileFooterTooltipVisible] =
-    useState(false);
-  const footerEnrollRef = useRef<HTMLDivElement>(null);
+  // const [mobileFooterTooltipVisible, setMobileFooterTooltipVisible] =
+  //   useState(false);
+  // const footerEnrollRef = useRef<HTMLDivElement>(null);
 
   // Click outside handlers for each tooltip
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        mobileHeaderRef.current &&
-        !mobileHeaderRef.current.contains(e.target as Node)
-      ) {
-        setMobileHeaderTooltipVisible(false);
-      }
-      if (
-        heroEnrollRef.current &&
-        !heroEnrollRef.current.contains(e.target as Node)
-      ) {
-        setMobileHeroTooltipVisible(false);
-      }
-      if (
-        contactEnrollRef.current &&
-        !contactEnrollRef.current.contains(e.target as Node)
-      ) {
-        setMobileContactTooltipVisible(false);
-      }
-      if (
-        footerEnrollRef.current &&
-        !footerEnrollRef.current.contains(e.target as Node)
-      ) {
-        setMobileFooterTooltipVisible(false);
-      }
-      Object.keys(programsEnrollRef.current).forEach((slug) => {
-        const ref = programsEnrollRef.current[slug];
-        if (ref && !ref.contains(e.target as Node)) {
-          setMobileProgramsTooltipVisible((prev) => ({
-            ...prev,
-            [slug]: false,
-          }));
-        }
-      });
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     if (
+  //       mobileHeaderRef.current &&
+  //       !mobileHeaderRef.current.contains(e.target as Node)
+  //     ) {
+  //       setMobileHeaderTooltipVisible(false);
+  //     }
+  //     if (
+  //       heroEnrollRef.current &&
+  //       !heroEnrollRef.current.contains(e.target as Node)
+  //     ) {
+  //       setMobileHeroTooltipVisible(false);
+  //     }
+  //     if (
+  //       contactEnrollRef.current &&
+  //       !contactEnrollRef.current.contains(e.target as Node)
+  //     ) {
+  //       setMobileContactTooltipVisible(false);
+  //     }
+  //     if (
+  //       footerEnrollRef.current &&
+  //       !footerEnrollRef.current.contains(e.target as Node)
+  //     ) {
+  //       setMobileFooterTooltipVisible(false);
+  //     }
+  //     Object.keys(programsEnrollRef.current).forEach((slug) => {
+  //       const ref = programsEnrollRef.current[slug];
+  //       if (ref && !ref.contains(e.target as Node)) {
+  //         setMobileProgramsTooltipVisible((prev) => ({
+  //           ...prev,
+  //           [slug]: false,
+  //         }));
+  //       }
+  //     });
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => document.removeEventListener("click", handleClickOutside);
+  // }, []);
 
   // Mobile tooltip click handlers
-  const handleHeroClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!mobileHeroTooltipVisible) {
-      e.preventDefault();
-      setMobileHeroTooltipVisible(true);
-    }
-  };
+  // const handleHeroClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   if (!mobileHeroTooltipVisible) {
+  //     e.preventDefault();
+  //     setMobileHeroTooltipVisible(true);
+  //   }
+  // };
 
-  const handleProgramClick = (
-    slug: string,
-    e: React.MouseEvent<HTMLAnchorElement>
-  ) => {
-    if (!mobileProgramsTooltipVisible[slug]) {
-      e.preventDefault();
-      setMobileProgramsTooltipVisible((prev) => ({ ...prev, [slug]: true }));
-    }
-  };
+  // const handleProgramClick = (
+  //   slug: string,
+  //   e: React.MouseEvent<HTMLAnchorElement>
+  // ) => {
+  //   if (!mobileProgramsTooltipVisible[slug]) {
+  //     e.preventDefault();
+  //     setMobileProgramsTooltipVisible((prev) => ({ ...prev, [slug]: true }));
+  //   }
+  // };
 
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!mobileContactTooltipVisible) {
-      e.preventDefault();
-      setMobileContactTooltipVisible(true);
-    }
-  };
+  // const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   if (!mobileContactTooltipVisible) {
+  //     e.preventDefault();
+  //     setMobileContactTooltipVisible(true);
+  //   }
+  // };
 
-  const handleFooterClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!mobileFooterTooltipVisible) {
-      e.preventDefault();
-      setMobileFooterTooltipVisible(true);
-    }
-  };
+  // const handleFooterClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   if (!mobileFooterTooltipVisible) {
+  //     e.preventDefault();
+  //     setMobileFooterTooltipVisible(true);
+  //   }
+  // };
 
-  const handleMobileHeaderClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!mobileHeaderTooltipVisible) {
-      e.preventDefault(); // prevent navigation until tooltip is dismissed
-      setMobileHeaderTooltipVisible(true);
-    }
-  };
+  // const handleMobileHeaderClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   if (!mobileHeaderTooltipVisible) {
+  //     e.preventDefault(); // prevent navigation until tooltip is dismissed
+  //     setMobileHeaderTooltipVisible(true);
+  //   }
+  // };
 
   const navLinks: [string, string][] = [
     ["About", "/#about"],
@@ -363,9 +363,9 @@ const HomePage: React.FC = () => {
 
             {/* Header Enroll Button with Tooltip */}
             <div
-              className="relative"
-              onMouseEnter={() => setHoveredButton("headerEnroll")}
-              onMouseLeave={() => setHoveredButton(null)}
+            // className="relative"
+            // onMouseEnter={() => setHoveredButton("headerEnroll")}
+            // onMouseLeave={() => setHoveredButton(null)}
             >
               <Link
                 to="/form"
@@ -373,9 +373,11 @@ const HomePage: React.FC = () => {
               >
                 <span className="relative z-10">Enroll</span>
               </Link>
-              {hoveredButton === "headerEnroll" && (
+
+              {/*{hoveredButton === "headerEnroll" && (
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+
+                   <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700">
@@ -390,9 +392,9 @@ const HomePage: React.FC = () => {
                       Enroll
                     </strong>{" "}
                     to register for the webinar.
-                  </p> */}
+                  </p> 
                 </div>
-              )}
+              )}*/}
             </div>
           </div>
 
@@ -455,18 +457,21 @@ const HomePage: React.FC = () => {
               ))}
 
               {/* Mobile Enroll Button */}
-              <div className="relative" ref={mobileHeaderRef}>
+              <div
+                className="relative"
+                //  ref={mobileHeaderRef}
+              >
                 <Link
                   to="/form"
                   className="block bg-grass-green text-white text-center py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
-                  onClick={handleMobileHeaderClick}
+                  // onClick={handleMobileHeaderClick}
                 >
                   Enroll
                 </Link>
 
-                {mobileHeaderTooltipVisible && (
+                {/*{mobileHeaderTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20">
-                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                     <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -481,9 +486,9 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p> */}
+                    </p> 
                   </div>
-                )}
+                )}*/}
               </div>
             </div>
           </div>
@@ -550,21 +555,24 @@ const HomePage: React.FC = () => {
             </a>
 
             {/* Enroll Now Button */}
-            <div className="relative" ref={heroEnrollRef}>
+            <div
+              className="relative"
+              //  ref={heroEnrollRef}
+            >
               <Link
                 to="/form"
                 className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
-                onClick={handleHeroClick}
-                onMouseEnter={() => setHoveredButton("heroEnroll")}
-                onMouseLeave={() => setHoveredButton(null)}
+                // onClick={handleHeroClick}
+                // onMouseEnter={() => setHoveredButton("heroEnroll")}
+                // onMouseLeave={() => setHoveredButton(null)}
               >
                 Enroll Now
               </Link>
 
               {/* Desktop tooltip */}
-              {hoveredButton === "heroEnroll" && (
+              {/*{hoveredButton === "heroEnroll" && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                   <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700 leading-relaxed">
@@ -576,14 +584,14 @@ const HomePage: React.FC = () => {
                     </strong>
                     . Click <strong className="text-amber-600">Enroll</strong>{" "}
                     to register for the webinar.
-                  </p> */}
+                  </p> 
                 </div>
-              )}
+              )}*/}
 
               {/* Mobile tooltip */}
-              {mobileHeroTooltipVisible && (
+              {/*{mobileHeroTooltipVisible && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                  {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                   <h3 className="font-bold text-lg mb-1 text-red-600">
                     Enrollment not started yet!
                   </h3>
                   <p className="text-sm text-gray-700 leading-relaxed">
@@ -595,9 +603,9 @@ const HomePage: React.FC = () => {
                     </strong>
                     . Tap <strong className="text-amber-600">Enroll</strong> to
                     register for the webinar.
-                  </p> */}
+                  </p> 
                 </div>
-              )}
+              )}*/}
             </div>
           </div>
         </div>
@@ -816,22 +824,22 @@ const HomePage: React.FC = () => {
                   {/* Enroll Button */}
                   <div
                     className="relative"
-                    ref={(el) => (programsEnrollRef.current[program.slug] = el)}
-                    onMouseEnter={() => setHoveredButton(program.slug)}
-                    onMouseLeave={() => setHoveredButton(null)}
+                    // ref={(el) => (programsEnrollRef.current[program.slug] = el)}
+                    // onMouseEnter={() => setHoveredButton(program.slug)}
+                    // onMouseLeave={() => setHoveredButton(null)}
                   >
                     <Link
                       to="/form"
                       className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition relative z-10"
-                      onClick={(e) => handleProgramClick(program.slug, e)}
+                      // onClick={(e) => handleProgramClick(program.slug, e)}
                     >
                       Enroll
                     </Link>
 
                     {/* Desktop tooltip */}
-                    {hoveredButton === program.slug && (
+                    {/*{hoveredButton === program.slug && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                        {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                       <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
                         <p className="text-sm text-gray-700">
@@ -849,14 +857,14 @@ const HomePage: React.FC = () => {
                           . Click{" "}
                           <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
-                        </p> */}
+                        </p> 
                       </div>
-                    )}
+                    )}*/}
 
                     {/* Mobile tooltip */}
-                    {mobileProgramsTooltipVisible[program.slug] && (
+                    {/* {mobileProgramsTooltipVisible[program.slug] && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                        {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                         <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
                         </h3>
                         <p className="text-sm text-gray-700">
@@ -874,9 +882,9 @@ const HomePage: React.FC = () => {
                           . Tap{" "}
                           <strong className="text-amber-600">Enroll</strong> to
                           register for the webinar.
-                        </p> */}
+                        </p> 
                       </div>
-                    )}
+                    )}*/}
                   </div>
                 </div>
 
@@ -1251,22 +1259,22 @@ const HomePage: React.FC = () => {
               {/* Enroll Button */}
               <div
                 className="relative"
-                ref={contactEnrollRef}
-                onMouseEnter={() => setHoveredButton("contactEnroll")}
-                onMouseLeave={() => setHoveredButton(null)}
+                // ref={contactEnrollRef}
+                // onMouseEnter={() => setHoveredButton("contactEnroll")}
+                // onMouseLeave={() => setHoveredButton(null)}
               >
                 <Link
                   to="/form"
                   className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition relative z-10"
-                  onClick={handleContactClick}
+                  // onClick={handleContactClick}
                 >
                   Enroll Now
                 </Link>
 
                 {/* Desktop tooltip */}
-                {hoveredButton === "contactEnroll" && (
+                {/* {hoveredButton === "contactEnroll" && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                     <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -1281,14 +1289,14 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p> */}
+                    </p> 
                   </div>
-                )}
+                )}*/}
 
                 {/* Mobile tooltip */}
-                {mobileContactTooltipVisible && (
+                {/* {mobileContactTooltipVisible && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                    {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                     <h3 className="font-bold text-lg mb-1 text-red-600">
                       Enrollment not started yet!
                     </h3>
                     <p className="text-sm text-gray-700">
@@ -1303,9 +1311,9 @@ const HomePage: React.FC = () => {
                         Enroll
                       </strong>{" "}
                       to register for the webinar.
-                    </p> */}
+                    </p> 
                   </div>
-                )}
+                )}*/}
               </div>
             </div>
           </div>
@@ -1351,22 +1359,22 @@ const HomePage: React.FC = () => {
               <li>
                 <div
                   className="relative"
-                  ref={footerEnrollRef}
-                  onMouseEnter={() => setHoveredButton("footerEnroll")}
-                  onMouseLeave={() => setHoveredButton(null)}
+                  // ref={footerEnrollRef}
+                  // onMouseEnter={() => setHoveredButton("footerEnroll")}
+                  // onMouseLeave={() => setHoveredButton(null)}
                 >
                   <Link
                     to="/form"
                     className="hover:text-grass-green transition"
-                    onClick={handleFooterClick}
+                    // onClick={handleFooterClick}
                   >
                     Apply Now
                   </Link>
 
                   {/* Desktop tooltip */}
-                  {hoveredButton === "footerEnroll" && (
+                  {/*{hoveredButton === "footerEnroll" && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
-                      {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                       <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
                       <p className="text-sm text-gray-700">
@@ -1380,14 +1388,14 @@ const HomePage: React.FC = () => {
                         . Click{" "}
                         <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
-                      </p> */}
+                      </p> 
                     </div>
-                  )}
+                  )}*/}
 
                   {/* Mobile tooltip above the button */}
-                  {mobileFooterTooltipVisible && (
+                  {/* {mobileFooterTooltipVisible && (
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mt-2 w-72 md:w-80 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
-                      {/* <h3 className="font-bold text-lg mb-1 text-red-600">
+                       <h3 className="font-bold text-lg mb-1 text-red-600">
                         Enrollment not started yet!
                       </h3>
                       <p className="text-sm text-gray-700">
@@ -1401,9 +1409,9 @@ const HomePage: React.FC = () => {
                         . Tap{" "}
                         <strong className="text-amber-600">Apply Now</strong> to
                         register for the webinar.
-                      </p> */}
+                      </p>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </li>
             </ul>
