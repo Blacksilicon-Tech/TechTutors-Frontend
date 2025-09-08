@@ -1,52 +1,67 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const PaymentVerifyPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
+const Spinner = () => (
+  <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+);
+
+const PaymentVerifyPage = () => {
   const navigate = useNavigate();
-  const [message, setMessage] = useState("Verifying payment...");
+  const [searchParams] = useSearchParams();
+  const [status, setStatus] = useState("Checking payment...");
+  const [loading, setLoading] = useState(true);
+
+  // 🔹 Paystack usually returns `reference`, not `tx_ref`
+  const ref =
+    searchParams.get("reference") ||
+    searchParams.get("trxref") ||
+    searchParams.get("tx_ref") ||
+    sessionStorage.getItem("txRef");
 
   useEffect(() => {
-    const verifyPayment = async () => {
-      // ✅ Paystack always returns reference (sometimes also trxref, but they are same)
-      const txRef = searchParams.get("reference") || searchParams.get("trxref");
+    if (!ref) {
+      navigate("/payment");
+      return;
+    }
 
-      if (!txRef) {
-        setMessage("Invalid payment verification link.");
-        return;
-      }
+    // Save for later retries
+    sessionStorage.setItem("txRef", ref);
 
+    const checkStatus = async () => {
       try {
-        const res = await fetch(`/api/payments/status?tx_ref=${txRef}`);
+        const res = await fetch(`/api/payments/status?reference=${ref}`);
+
         if (!res.ok) throw new Error("Verification failed");
 
-        const data: { status: string } = await res.json();
+        const data = await res.json();
+        const paymentStatus = data.status;
 
-        if (data.status?.toUpperCase() === "SUCCESSFUL") {
-          setMessage("✅ Payment successful! Redirecting...");
+        if (paymentStatus === "SUCCESSFUL") {
+          setStatus("✅ Payment successful! Redirecting...");
+          setLoading(false);
           setTimeout(() => navigate("/"), 2000);
+        } else if (paymentStatus === "FAILED") {
+          setStatus("❌ Payment failed. Redirecting to retry...");
+          setLoading(false);
+          setTimeout(() => navigate(`/payment/retry?tx_ref=${ref}`), 2000);
         } else {
-          setMessage("❌ Payment failed. Redirecting to retry...");
-          setTimeout(() => navigate(`/payment/retry?tx_ref=${txRef}`), 2000);
+          setStatus("⏳ Payment still pending... checking again.");
+          setLoading(true);
+          setTimeout(checkStatus, 5000); // poll every 5s
         }
-      } catch (err) {
-        setMessage("⚠️ Error verifying payment. Redirecting to retry...");
-        setTimeout(
-          () => navigate(`/payment/retry?tx_ref=${txRef ?? ""}`),
-          2000
-        );
+      } catch (err: any) {
+        setStatus(err.message || "Something went wrong");
+        setLoading(false);
       }
     };
 
-    verifyPayment();
-  }, [searchParams, navigate]);
+    checkStatus();
+  }, [ref, navigate]);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-6 text-center">
-        <h1 className="text-xl font-bold mb-2">Payment Verification</h1>
-        <p>{message}</p>
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen text-center space-y-4">
+      {loading && <Spinner />}
+      <p className="text-gray-700 text-lg">{status}</p>
     </div>
   );
 };

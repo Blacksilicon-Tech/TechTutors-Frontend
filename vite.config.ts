@@ -9,9 +9,10 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://api-growtechafrica.blacksillicon.com/api/registration",
+        target:
+          // "https://api-growtechafrica.blacksillicon.com/api/registration"
+          "http://localhost:8080",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

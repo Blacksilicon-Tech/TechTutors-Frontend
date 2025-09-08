@@ -17,6 +17,7 @@ type Program = {
   courseCompletion: string;
   professionalCertificateExam: string;
   programProfessionalCertificate: string;
+  brochure: string;
   expandable?: { bullets: string[] };
 };
 const programs: Program[] = [
@@ -42,6 +43,7 @@ const programs: Program[] = [
     courseCompletion: "Assessment based",
     professionalCertificateExam: "Online",
     programProfessionalCertificate: "1",
+    brochure: "/brochures/CloudandCybersecurity.pdf",
     expandable: {
       bullets: [
         "Covers cloud computing essentials and cybersecurity fundamentals for building a solid foundation.",
@@ -76,6 +78,7 @@ const programs: Program[] = [
     courseCompletion: "Assessment based",
     professionalCertificateExam: "Online",
     programProfessionalCertificate: "1",
+    brochure: "/brochures/AIDeveloper.pdf",
     expandable: {
       bullets: [
         "Covers Microsoft Azure fundamentals, services, and integrations for AI-driven development.",
@@ -107,6 +110,7 @@ const programs: Program[] = [
     courseCompletion: "Assessment based",
     professionalCertificateExam: "Online",
     programProfessionalCertificate: "1",
+    brochure: "/brochures/PowerPlatform(PP).pdf",
     expandable: {
       bullets: [
         "Introduces Microsoft Power Platform fundamentals, tools, and core capabilities.",
@@ -140,6 +144,7 @@ const programs: Program[] = [
     courseCompletion: "Assessment based",
     professionalCertificateExam: "Online",
     programProfessionalCertificate: "1",
+    brochure: "/brochures/DataEngineer.pdf",
     expandable: {
       bullets: [
         "Introduces core Microsoft Azure services and infrastructure for data engineering solutions.",
@@ -173,6 +178,7 @@ const programs: Program[] = [
     courseCompletion: "Assessment based",
     professionalCertificateExam: "Online",
     programProfessionalCertificate: "1",
+    brochure: "/brochures/DataAnalyst.pdf",
     expandable: {
       bullets: [
         "Introduces Microsoft Azure services and tools essential for modern data analytics.",
@@ -820,6 +826,16 @@ const HomePage: React.FC = () => {
                   >
                     {expandedSlug === program.slug ? "Show less" : "Learn more"}
                   </button>
+
+                  {/* Download Brochure Button */}
+
+                  <a
+                    href={program.brochure} // 🔹 dynamic per program
+                    download
+                    className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-sm font-medium"
+                  >
+                    Download Brochure
+                  </a>
 
                   {/* Enroll Button */}
                   <div
