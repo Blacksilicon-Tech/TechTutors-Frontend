@@ -323,7 +323,8 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       console.log("Submitting form data:", Object.fromEntries(data.entries()));
 
       const response = await fetch(
-        "https://api-growtechafrica.blacksillicon.com/api/registration",
+        `https://api-growtechafrica.blacksillicon.com/api/registration`,
+
         {
           method: "POST",
           body: data,

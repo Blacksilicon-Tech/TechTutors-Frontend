@@ -18,7 +18,8 @@ const PaymentRetryPage = () => {
 
     try {
       const res = await fetch(
-        "https://api-growtechafrica.blacksillicon.com/api/payments/create?tx_ref=${txRef}",
+        `https://api-growtechafrica.blacksillicon.com/api/payments/create?tx_ref=${txRef}`,
+
         {
           method: "POST",
         }
