@@ -30,7 +30,10 @@ const PaymentVerifyPage = () => {
     const checkStatus = async () => {
       try {
         const res = await fetch(
-          `"https://api-growtechafrica.blacksillicon.com/api/payments/status?reference=${ref}`
+          "https://api-growtechafrica.blacksillicon.com/api/payments/status?reference=${ref}",
+          {
+            method: "GET",
+          }
         );
 
         if (!res.ok) throw new Error("Verification failed");

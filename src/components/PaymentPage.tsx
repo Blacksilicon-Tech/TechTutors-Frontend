@@ -17,7 +17,7 @@ const PaymentPage = () => {
     const initPayment = async () => {
       try {
         const res = await fetch(
-          `"https://api-growtechafrica.blacksillicon.com/api/payments/create?token=${token}`,
+          "https://api-growtechafrica.blacksillicon.com/api/payments/create?token=${token}",
           {
             method: "POST",
           }
