@@ -819,7 +819,8 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-4 flex justify-between items-center gap-2 relative">
+                {/*     
+                 <div className="mt-4 flex justify-between items-center gap-2 relative">
                   <button
                     onClick={() => toggleExpand(program.slug)}
                     className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-sm rounded-md border border-gray-300 transition"
@@ -828,7 +829,7 @@ const HomePage: React.FC = () => {
                   </button>
 
                   {/* Download Brochure Button */}
-
+                {/*
                   <a
                     href={program.brochure} // 🔹 dynamic per program
                     download
@@ -836,14 +837,18 @@ const HomePage: React.FC = () => {
                   >
                     Download Brochure
                   </a>
+                  */}
 
-                  {/* Enroll Button */}
+                {/* Enroll Button */}
+                {/*
                   <div
                     className="relative"
                     // ref={(el) => (programsEnrollRef.current[program.slug] = el)}
                     // onMouseEnter={() => setHoveredButton(program.slug)}
                     // onMouseLeave={() => setHoveredButton(null)}
                   >
+
+                    {/*
                     <Link
                       to="/form"
                       className="bg-grass-green text-white px-4 py-2 rounded font-semibold hover:bg-grass-green-dark text-sm transition relative z-10"
@@ -851,9 +856,10 @@ const HomePage: React.FC = () => {
                     >
                       Enroll
                     </Link>
+                    */}
 
-                    {/* Desktop tooltip */}
-                    {/*{hoveredButton === program.slug && (
+                {/* Desktop tooltip */}
+                {/*{hoveredButton === program.slug && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 hidden md:block">
                        <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
@@ -877,8 +883,8 @@ const HomePage: React.FC = () => {
                       </div>
                     )}*/}
 
-                    {/* Mobile tooltip */}
-                    {/* {mobileProgramsTooltipVisible[program.slug] && (
+                {/* Mobile tooltip */}
+                {/* {mobileProgramsTooltipVisible[program.slug] && (
                       <div className="absolute bottom-full right-0 mr-4 mb-2 w-72 md:w-96 bg-white text-gray-800 p-4 rounded-2xl shadow-xl border-2 border-gray-200 z-20 md:hidden">
                          <h3 className="font-bold text-lg mb-1 text-red-600">
                           Enrollment not started yet!
@@ -900,8 +906,42 @@ const HomePage: React.FC = () => {
                           register for the webinar.
                         </p> 
                       </div>
-                    )}*/}
+                    )}
                   </div>
+                </div> 
+                */}
+
+                <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                  {/* Learn More Button */}
+                  <button
+                    onClick={() => toggleExpand(program.slug)}
+                    className="px-5 py-2 min-h-[44px] rounded-lg bg-purple-600 text-white text-sm font-medium 
+               flex items-center justify-center
+               hover:bg-purple-700 hover:scale-105 transition duration-200 shadow"
+                  >
+                    {expandedSlug === program.slug ? "Show less" : "Learn more"}
+                  </button>
+
+                  {/* Download Brochure Button */}
+                  <a
+                    href={program.brochure}
+                    download
+                    className="px-5 py-2 min-h-[44px] rounded-lg bg-blue-600 text-white text-sm font-medium 
+               flex items-center justify-center
+               hover:bg-blue-700 hover:scale-105 transition duration-200 shadow"
+                  >
+                    Download Brochure
+                  </a>
+
+                  {/* Enroll Button */}
+                  <Link
+                    to="/form"
+                    className="px-5 py-2 min-h-[44px] rounded-lg bg-green-600 text-white text-sm font-semibold 
+               flex items-center justify-center
+               hover:bg-green-700 hover:scale-105 transition duration-200 shadow"
+                  >
+                    Enroll
+                  </Link>
                 </div>
 
                 {expandedSlug === program.slug && (
