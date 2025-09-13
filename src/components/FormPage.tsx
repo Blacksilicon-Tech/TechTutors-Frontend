@@ -339,13 +339,15 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
         setFileName("");
         if (onSubmit) onSubmit(formData);
       } else {
-        const errorBody = await response.text();
-        let errorMsg;
+        let errorMsg = "Submission failed";
         try {
-          const errJson = JSON.parse(errorBody);
-          errorMsg = errJson.message || "Submission failed";
-        } catch {
-          errorMsg = errorBody || "Submission failed";
+          const errJson = await response.json(); // ✅ parse JSON directly
+          if (errJson && errJson.message) {
+            errorMsg = errJson.message;
+          }
+        } catch (parseError) {
+          const errorText = await response.text();
+          errorMsg = errorText || "Submission failed";
         }
 
         setIsSubmitting(false);

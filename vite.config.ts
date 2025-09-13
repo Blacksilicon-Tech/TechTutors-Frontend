@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://api-growtechafrica.blacksillicon.com/api/registration",
+        target: "https://api-growtechafrica.blacksillicon.com",
 
         changeOrigin: true,
       },
