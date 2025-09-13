@@ -31,7 +31,3 @@
 .animate-spin-slow {
   animation: spin 2s linear infinite;
 }
-
-:root {
-  --header-height: 200px; /* fallback if JS hasn’t run */
-}
