@@ -321,10 +321,18 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       if (formData.additionalComments)
         data.append("additionalComments", formData.additionalComments);
 
+      // 🔹 Capture referral ID from URL query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const refId = urlParams.get("ref");
+      if (refId) {
+        data.append("referrerId", refId); // backend will match this with reseller
+      }
+
       console.log("Submitting form data:", Object.fromEntries(data.entries()));
 
       const response = await fetch(
         `https://api-growtechafrica.blacksillicon.com/api/registration`,
+        // `http://localhost:8080/api/registration`,
 
         {
           method: "POST",

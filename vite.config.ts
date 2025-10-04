@@ -6,13 +6,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://api-growtechafrica.blacksillicon.com",
-
-        changeOrigin: true,
-      },
-    },
-  },
+  
 });
