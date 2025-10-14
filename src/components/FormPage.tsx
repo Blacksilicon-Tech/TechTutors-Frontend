@@ -47,6 +47,7 @@ const defaultCourses = [
   "Power Platform (PP) – ₦384,000",
   "Data Engineer – ₦400,000",
   "Data Analyst – ₦400,000",
+  "Existing Course Renewal – ₦1,500",
 ];
 const defaultStatuses = ["Student", "Employed", "Unemployed", "Other"];
 const defaultEducationLevels = [
