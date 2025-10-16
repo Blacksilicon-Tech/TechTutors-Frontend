@@ -47,7 +47,7 @@ const defaultCourses = [
   "Power Platform (PP) – ₦384,000",
   "Data Engineer – ₦400,000",
   "Data Analyst – ₦400,000",
-  "Existing Course Renewal – ₦1,500",
+  // "Existing Course Renewal – ₦1,500",
 ];
 const defaultStatuses = ["Student", "Employed", "Unemployed", "Other"];
 const defaultEducationLevels = [
@@ -528,8 +528,6 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
                     <option value="">Please Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
                   </SelectField>
                 </div>
                 <div className="md:col-span-2">
