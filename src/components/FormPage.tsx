@@ -207,9 +207,9 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [errors, setErrors] = useState<any>({});
+  // const [errors, setErrors] = useState<any>({});
 
   useEffect(() => {
     // Mobile menu toggle
@@ -251,6 +251,9 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
     };
   }, []);
 
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+
   // --- Handlers ---
   const handleChange = (
     e: React.ChangeEvent<
@@ -262,9 +265,27 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
     setErrors((prev) => ({ ...prev, [name]: "" })); // clear error on change
   };
 
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+
+      if (file.size > MAX_FILE_SIZE) {
+        // Show your error toast or state-based error message
+        alert("Image size too large. File must not exceed 10MB.");
+
+        // Reset file input (optional but recommended)
+        e.target.value = "";
+
+        // Clear stored file & fileName if needed
+        setFormData((prev) => ({ ...prev, cardImage: null }));
+        setFileName("");
+
+        return; // ⛔ stop here
+      }
+
+      // If valid, store normally
       setFormData((prev) => ({ ...prev, cardImage: file }));
       setFileName(file.name);
     }
@@ -737,7 +758,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
                         <p className="pl-1">or drag and drop</p>
                       </div>
                       <p className="text-xs text-gray-500">
-                        PNG, JPG, GIF up to 10MB
+                        PNG, JPG, GIF, PDF up to 10MB
                       </p>
                       {fileName && (
                         <p className="text-sm text-green-600 mt-2">
