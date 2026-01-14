@@ -11,25 +11,25 @@ const HeroSection = () => {
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Software / Engineering */}
         <span
-          className="absolute top-16 left-12 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-28 left-12 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "0s" }}
         >
           💻
         </span>
         <span
-          className="absolute top-1/4 left-1/3 text-5xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-1/4 left-1/3 text-3xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "0.6s" }}
         >
           🖥️
         </span>
         <span
-          className="absolute bottom-32 left-20 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute bottom-32 left-20 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "1.2s" }}
         >
           ⚙️
         </span>
         <span
-          className="absolute top-1/2 left-1/4 text-5xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-1/2 left-1/4 text-3xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "1.8s" }}
         >
           🧑‍💻
@@ -37,19 +37,19 @@ const HeroSection = () => {
 
         {/* Cloud / DevOps */}
         <span
-          className="absolute top-20 right-24 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-24 right-24 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "0.4s" }}
         >
           ☁️
         </span>
         <span
-          className="absolute bottom-1/3 right-32 text-5xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute bottom-1/3 right-32 text-3xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "1.4s" }}
         >
           🗄️
         </span>
         <span
-          className="absolute top-1/3 right-12 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-1/3 right-12 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "2s" }}
         >
           🌐
@@ -57,13 +57,13 @@ const HeroSection = () => {
 
         {/* Mobile / Devices */}
         <span
-          className="absolute bottom-24 left-1/3 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute bottom-24 left-1/3 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "0.8s" }}
         >
           📱
         </span>
         <span
-          className="absolute bottom-16 right-1/4 text-5xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute bottom-16 right-1/4 text-3xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "1.6s" }}
         >
           📡
@@ -71,13 +71,13 @@ const HeroSection = () => {
 
         {/* AI / Data */}
         <span
-          className="absolute top-1/4 right-1/3 text-6xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute top-1/4 right-1/3 text-4xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "1s" }}
         >
           🤖
         </span>
         <span
-          className="absolute bottom-1/4 right-16 text-5xl opacity-20 blur-[1px] animate-bounce"
+          className="absolute bottom-1/4 right-16 text-3xl opacity-20 blur-[1px] animate-bounce"
           style={{ animationDelay: "2.2s" }}
         >
           📊
