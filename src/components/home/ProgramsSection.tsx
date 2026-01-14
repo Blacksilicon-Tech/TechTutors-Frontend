@@ -173,13 +173,20 @@ const ProgramsSection: React.FC<Props> = ({ expandedSlug, toggleExpand }) => {
                 </Link>
               </div>
 
-              {expandedSlug === program.slug && (
-                <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-700">
-                  {program.expandable.bullets.map((bullet, idx) => (
-                    <li key={idx}>{bullet}</li>
-                  ))}
-                </ul>
-              )}
+              {/* Only show expandable bullets if this program is expanded and bullets exist */}
+              {expandedSlug === program.slug &&
+                (() => {
+                  const bullets = program.expandable?.bullets;
+                  if (!bullets || bullets.length === 0) return null;
+
+                  return (
+                    <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-700">
+                      {bullets.map((bullet, idx) => (
+                        <li key={idx}>{bullet}</li>
+                      ))}
+                    </ul>
+                  );
+                })()}
             </div>
           </div>
         ))}
