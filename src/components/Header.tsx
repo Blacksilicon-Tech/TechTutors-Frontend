@@ -1,13 +1,13 @@
-// components/Header.tsx
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // On mount, measure header height and set it as CSS variable
   useEffect(() => {
     if (headerRef.current) {
       const updateHeight = () => {
@@ -21,6 +21,41 @@ export default function Header() {
       return () => window.removeEventListener("resize", updateHeight);
     }
   }, []);
+
+  // Scroll to section by ID
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Logo click: scroll to hero
+  const handleLogoClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      scrollToSection("hero");
+    } else {
+      navigate("/", { state: { scrollTo: "hero" } });
+    }
+  };
+
+  // Nav link click
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      scrollToSection(id);
+    } else {
+      // Navigate to homepage and pass section id in state
+      navigate("/", { state: { scrollTo: id } });
+    }
+    setIsOpen(false);
+  };
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -39,21 +74,26 @@ export default function Header() {
     >
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+        <a
+          href="#hero"
+          className="flex items-center gap-2 shrink-0"
+          onClick={handleLogoClick}
+        >
           <img
             src="/growtechafrica.png"
             alt="GrowTechAfrica"
             className="h-14 w-auto"
           />
           <span className="font-bold text-xl">GrowTechAfrica</span>
-        </Link>
+        </a>
 
-        {/* Desktop Nav (only on xl+) */}
+        {/* Desktop Nav */}
         <nav className="hidden xl:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavLinkClick(e, link.href.substring(1))}
               className="relative text-black font-medium transition-colors duration-300 group"
             >
               {link.name}
@@ -68,13 +108,12 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Mobile / Tablet Menu Button (sm + md + lg only) */}
+        {/* Mobile Menu */}
         <button className="xl:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile / Tablet Nav */}
       {isOpen && (
         <div className="xl:hidden bg-[#0f172a] border-t border-white/10">
           <nav className="flex flex-col items-center py-6 space-y-4">
@@ -82,7 +121,7 @@ export default function Header() {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavLinkClick(e, link.href.substring(1))}
                 className="relative text-white font-medium text-lg transition-colors duration-300 group"
               >
                 {link.name}
@@ -96,7 +135,6 @@ export default function Header() {
             >
               Enroll
             </Link>
-            
           </nav>
         </div>
       )}

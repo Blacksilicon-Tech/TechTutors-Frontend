@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import FormPage from "./components/FormPage";
+import HomePage from "./pages/HomePage";
+import FormPage from "./pages/FormPage";
 // import Webinar from "./components/Webinar";
 
 import "./App.css";
-import PaymentVerifyPage from "./components/PaymentVerifyPage";
-import PaymentPage from "./components/PaymentPage";
-import PaymentRetryPage from "./components/PaymentRetryPage";
+import PaymentVerifyPage from "./pages/PaymentVerifyPage";
+import PaymentPage from "./pages/PaymentPage";
+import PaymentRetryPage from "./pages/PaymentRetryPage";
 
 function App() {
   return (
