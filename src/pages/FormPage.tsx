@@ -42,11 +42,11 @@ const defaultCountries = [
   "Canada",
 ];
 const defaultCourses = [
-  "Cloud and Cybersecurity – ₦496,000",
-  "AI Developer – ₦416,000",
-  "Power Platform (PP) – ₦384,000",
-  "Data Engineer – ₦400,000",
-  "Data Analyst – ₦400,000",
+  "Cloud and Cybersecurity – ₦434,000",
+  "AI Developer – ₦364,000",
+  "Power Platform (PP) – ₦336,000",
+  "Data Engineer – ₦350,000",
+  "Data Analyst – ₦350,000",
   // "Existing Course Renewal – ₦1,500",
 ];
 const defaultStatuses = ["Student", "Employed", "Unemployed", "Other"];
