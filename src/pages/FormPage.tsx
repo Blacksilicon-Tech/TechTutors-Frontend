@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+
 import {
   Upload,
   FileText,
@@ -15,6 +16,7 @@ import {
   CheckCircle,
   Loader2,
 } from "lucide-react";
+import { trackMetaEvent } from "../analytics/metaPixel";
 
 // --- Helper Data ---
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -246,7 +248,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
         });
       }
       anchors.forEach((anchor) => {
-        anchor.removeEventListener("click", () => {});
+        anchor.removeEventListener("click", () => { });
       });
     };
   }, []);
@@ -363,6 +365,12 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       );
 
       if (response.ok) {
+
+        trackMetaEvent("CompleteRegistration", {
+          course: formData.course,
+          country: formData.country,
+        });
+
         setIsSubmitting(false);
         setIsSubmitted(true);
         setFormData(initialFormData);

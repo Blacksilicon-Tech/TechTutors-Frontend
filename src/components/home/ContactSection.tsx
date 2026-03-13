@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { trackMetaEvent } from "../../analytics/metaPixel";
+
 
 const ContactSection = () => {
   return (
@@ -67,6 +69,7 @@ const ContactSection = () => {
             >
               <Link
                 to="/form"
+                onClick={() => trackMetaEvent("Lead")}
                 className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition relative z-10"
                 // onClick={handleContactClick}
               >

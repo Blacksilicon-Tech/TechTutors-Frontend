@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { trackMetaEvent } from "../../analytics/metaPixel";
+
 
 const HeroSection = () => {
   return (
@@ -116,6 +118,7 @@ const HeroSection = () => {
           <div className="relative">
             <Link
               to="/form"
+              onClick={() => trackMetaEvent("Lead")}
               className="relative border border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:text-purple-900 shadow-lg hover:shadow-white/30 transform hover:scale-105 transition-all duration-300"
             >
               Enroll Now

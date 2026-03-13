@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { trackMetaEvent } from "../analytics/metaPixel";
+
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,6 +104,7 @@ export default function Header() {
           ))}
           <Link
             to="/form"
+            onClick={() => trackMetaEvent("Lead")}
             className="bg-gradient-to-r from-green-500 to-green-600 text-black font-bold px-5 py-2 rounded-full shadow hover:scale-105 transition"
           >
             Enroll
@@ -130,8 +133,11 @@ export default function Header() {
             ))}
             <Link
               to="/form"
+              onClick={() => {
+                trackMetaEvent("Lead");
+                setIsOpen(false);
+              }}
               className="bg-gradient-to-r from-green-500 to-green-600 text-black font-bold px-6 py-2 rounded-full shadow hover:scale-105 transition"
-              onClick={() => setIsOpen(false)}
             >
               Enroll
             </Link>
