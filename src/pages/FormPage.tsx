@@ -352,7 +352,7 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
         data.append("referrerId", refId); // backend will match this with reseller
       }
 
-      console.log("Submitting form data:", Object.fromEntries(data.entries()));
+
 
       const response = await fetch(
         `https://api-growtechafrica.blacksillicon.com/api/registration`,
