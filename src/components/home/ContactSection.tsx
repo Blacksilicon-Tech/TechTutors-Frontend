@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { trackMetaEvent } from "../../analytics/metaPixel";
+import { trackGAEvent } from "../../analytics/googleAnalytics";
 
 
 const ContactSection = () => {
@@ -63,15 +64,18 @@ const ContactSection = () => {
             {/* Enroll Button */}
             <div
               className="relative"
-              // ref={contactEnrollRef}
-              // onMouseEnter={() => setHoveredButton("contactEnroll")}
-              // onMouseLeave={() => setHoveredButton(null)}
+            // ref={contactEnrollRef}
+            // onMouseEnter={() => setHoveredButton("contactEnroll")}
+            // onMouseLeave={() => setHoveredButton(null)}
             >
               <Link
                 to="/form"
-                onClick={() => trackMetaEvent("Lead")}
+                onClick={() => {
+                  trackMetaEvent("Lead");
+                  trackGAEvent("generate_lead");
+                }}
                 className="inline-block bg-grass-green text-white px-6 py-3 rounded-full font-semibold hover:bg-grass-green-dark transition relative z-10"
-                // onClick={handleContactClick}
+              // onClick={handleContactClick}
               >
                 Enroll Now
               </Link>

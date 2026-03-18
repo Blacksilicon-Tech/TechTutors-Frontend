@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { programs } from "./programsData";
 import { trackMetaEvent } from "../../analytics/metaPixel";
+import { trackGAEvent } from "../../analytics/googleAnalytics";
 
 type Props = {
   expandedSlug: string | null;
@@ -166,7 +167,10 @@ const ProgramsSection: React.FC<Props> = ({ expandedSlug, toggleExpand }) => {
                 {/* Enroll Button */}
                 <Link
                   to="/form"
-                  onClick={() => trackMetaEvent("Lead")}
+                  onClick={() => {
+                    trackMetaEvent("Lead");
+                    trackGAEvent("generate_lead");
+                  }}
                   className="px-5 py-2 min-h-[44px] rounded-lg bg-green-600 text-white text-sm font-semibold 
                   flex items-center justify-center
                   hover:bg-green-700 hover:scale-105 transition duration-200 shadow"

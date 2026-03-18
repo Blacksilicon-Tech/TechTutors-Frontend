@@ -17,6 +17,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { trackMetaEvent } from "../analytics/metaPixel";
+import { trackGAEvent } from "../analytics/googleAnalytics";
 
 // --- Helper Data ---
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -367,6 +368,11 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       if (response.ok) {
 
         trackMetaEvent("CompleteRegistration", {
+          course: formData.course,
+          country: formData.country,
+        });
+
+        trackGAEvent("sign_up", {
           course: formData.course,
           country: formData.country,
         });
