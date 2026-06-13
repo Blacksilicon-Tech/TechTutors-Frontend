@@ -349,11 +349,16 @@ const FormPage: React.FC<TutorRegistrationFormProps> = ({
       // 🔹 Capture referral ID from URL query params
       const urlParams = new URLSearchParams(window.location.search);
       const refId = urlParams.get("ref");
+
       if (refId) {
-        data.append("referrerId", refId); // backend will match this with reseller
+        localStorage.setItem("growtech_referrer", refId);
       }
 
+      const storedReferrer = localStorage.getItem("growtech_referrer");
 
+      if (storedReferrer) {
+        data.append("referrerId", storedReferrer);
+      }
 
       const response = await fetch(
         `https://api-growtechafrica.blacksillicon.com/api/registration`,
