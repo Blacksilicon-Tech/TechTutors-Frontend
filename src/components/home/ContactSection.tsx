@@ -42,7 +42,7 @@ const ContactSection = () => {
                   href="tel:+2348087504707"
                   className="text-grass-green hover:underline"
                 >
-                  +234 808 750 4707
+                  +2348087504707
                 </a>
               </p>
               <p className="mb-2">
