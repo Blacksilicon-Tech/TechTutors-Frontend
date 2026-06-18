@@ -39,10 +39,10 @@ const ContactSection = () => {
               <p className="mb-2">
                 <strong>Phone:</strong>{" "}
                 <a
-                  href="tel:+2348104373270"
+                  href="tel:+2348087504707"
                   className="text-grass-green hover:underline"
                 >
-                  +234 810 437 3270
+                  +234 808 750 4707
                 </a>
               </p>
               <p className="mb-2">
